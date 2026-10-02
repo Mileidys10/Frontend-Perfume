@@ -586,4 +586,42 @@ export class SellerService {
       });
     }
   }
+
+  // ============= PEDIDOS DEL VENDEDOR (TASK T2.1) =============
+  getSellerOrders(page: number = 0, size: number = 10, status?: string): Observable<any> {
+    try {
+      this.checkPermissions();
+      const headers = this.getHeaders();
+      let params = `?page=${page}&size=${size}`;
+      if (status) {
+        params += `&status=${status}`;
+      }
+      return this.http.get<any>(`${API_URL}/seller/orders${params}`, { headers })
+        .pipe(catchError(this.handleError));
+    } catch (error: any) {
+      return throwError(() => error);
+    }
+  }
+
+  getSellerOrderDetail(orderId: number): Observable<any> {
+    try {
+      this.checkPermissions();
+      const headers = this.getHeaders();
+      return this.http.get<any>(`${API_URL}/seller/orders/${orderId}`, { headers })
+        .pipe(catchError(this.handleError));
+    } catch (error: any) {
+      return throwError(() => error);
+    }
+  }
+
+  updateSellerOrderStatus(orderId: number, status: string): Observable<any> {
+    try {
+      this.checkPermissions();
+      const headers = this.getHeaders();
+      return this.http.patch<any>(`${API_URL}/seller/orders/${orderId}/status`, { status }, { headers })
+        .pipe(catchError(this.handleError));
+    } catch (error: any) {
+      return throwError(() => error);
+    }
+  }
 }

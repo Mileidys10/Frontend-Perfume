@@ -1,6 +1,6 @@
 import { environment } from '../../environments/environment';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { map, tap, catchError } from 'rxjs/operators';
 
@@ -246,5 +246,63 @@ export class AdminService {
   getPerfumes(filtro?: string, page: number = 0, size: number = 10): Observable<any> {
     const params = filtro ? `?filtro=${filtro}&page=${page}&size=${size}` : `?page=${page}&size=${size}`;
     return this.http.get(`${this.API_URL}/perfumes${params}`);
+  }
+
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('authToken') || localStorage.getItem('adminToken') || '';
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+  }
+
+  // ============= MODERACIÓN DE PERFUMES (TASK T2.2) =============
+  getPendingPerfumes(): Observable<any[]> {
+    const headers = this.getHeaders();
+    return this.http.get<any>(`${this.API_URL}/perfumes/admin/pendientes`, { headers })
+      .pipe(
+        map(res => {
+          if (res && res.status === 'success' && Array.isArray(res.data)) {
+            return res.data;
+          } else if (Array.isArray(res)) {
+            return res;
+          }
+          return [];
+        }),
+        catchError(error => {
+          console.error('Error fetching pending perfumes:', error);
+          return of([]);
+        })
+      );
+  }
+
+  approvePerfume(perfumeId: number): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.post<any>(`${this.API_URL}/perfumes/admin/${perfumeId}/aprobar`, {}, { headers })
+      .pipe(
+        catchError(error => {
+          console.error('Error approving perfume:', error);
+          throw error;
+        })
+      );
+  }
+
+  rejectPerfume(perfumeId: number, motivo: string): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.post<any>(`${this.API_URL}/perfumes/admin/${perfumeId}/rechazar`, { motivo }, { headers })
+      .pipe(
+        catchError(error => {
+          console.error('Error rejecting perfume:', error);
+          throw error;
+        })
+      );
+  }
+
+  moderatePerfume(perfumeId: number, action: 'approve' | 'reject', reason?: string): Observable<any> {
+    if (action === 'approve') {
+      return this.approvePerfume(perfumeId);
+    } else {
+      return this.rejectPerfume(perfumeId, reason || 'Rechazado por el administrador');
+    }
   }
 }

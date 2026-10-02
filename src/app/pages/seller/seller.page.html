@@ -39,6 +39,13 @@
           <ion-badge color="tertiary" *ngIf="categories.length > 0">{{ categories.length }}</ion-badge>
         </ion-label>
       </ion-segment-button>
+          <ion-segment-button value="orders">
+        <ion-label>
+          <ion-icon name="cart"></ion-icon>
+          Pedidos
+          <ion-badge color="warning" *ngIf="orders.length > 0">{{ orders.length }}</ion-badge>
+        </ion-label>
+      </ion-segment-button>
     </ion-segment>
   </div>
 
@@ -420,6 +427,110 @@
       <ion-icon name="list-outline"></ion-icon>
       <h3>No hay categorías</h3>
       <p>¡Crea tu primera categoría!</p>
+    </div>
+  </div>
+
+  <!-- Orders Tab (Task T2.1) -->
+  <div *ngIf="activeTab === 'orders'" class="tab-content">
+    <div class="tab-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 12px;">
+      <div>
+        <h2>Pedidos de tus Fragancias</h2>
+        <p style="color: #a0a0a0; margin: 4px 0 0;">Supervisa tus ventas, despachos y cambia el estado de los pedidos recibidos.</p>
+      </div>
+      <ion-button fill="outline" size="small" (click)="loadOrders(ordersPage)" [disabled]="isOrdersLoading">
+        <ion-icon name="refresh-outline" slot="start"></ion-icon>
+        Actualizar
+      </ion-button>
+    </div>
+
+    <!-- Filtros de estado -->
+    <div style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 1rem;">
+      <ion-chip [outline]="ordersStatusFilter !== 'ALL'" (click)="filterOrdersByStatus('ALL')">Todos</ion-chip>
+      <ion-chip [outline]="ordersStatusFilter !== 'PENDING'" (click)="filterOrdersByStatus('PENDING')">Pendientes</ion-chip>
+      <ion-chip [outline]="ordersStatusFilter !== 'CONFIRMED'" (click)="filterOrdersByStatus('CONFIRMED')">Confirmados</ion-chip>
+      <ion-chip [outline]="ordersStatusFilter !== 'PROCESSING'" (click)="filterOrdersByStatus('PROCESSING')">En Preparación</ion-chip>
+      <ion-chip [outline]="ordersStatusFilter !== 'SHIPPED'" (click)="filterOrdersByStatus('SHIPPED')">Enviados</ion-chip>
+      <ion-chip [outline]="ordersStatusFilter !== 'DELIVERED'" (click)="filterOrdersByStatus('DELIVERED')">Entregados</ion-chip>
+    </div>
+
+    <div *ngIf="orderFeedback" style="background: rgba(212,175,55,0.15); border: 1px solid #D4AF37; padding: 12px; border-radius: 8px; margin-bottom: 1rem; color: #D4AF37;">
+      {{ orderFeedback }}
+    </div>
+
+    <ion-spinner *ngIf="isOrdersLoading" name="crescent"></ion-spinner>
+
+    <!-- Listado de órdenes -->
+    <div *ngIf="!isOrdersLoading && orders.length > 0" style="display: flex; flex-direction: column; gap: 16px;">
+      <ion-card *ngFor="let o of orders" style="background: #181818; border: 1px solid rgba(212,175,55,0.25); border-radius: 12px; margin: 0; padding: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+          <div>
+            <h3 style="color: #fff; margin: 0 0 4px; font-size: 1.1rem;">
+              Orden #{{ o.orderNumber || o.id }}
+            </h3>
+            <span style="color: #888; font-size: 0.85rem;">{{ o.createdAt || o.fecha || 'Fecha reciente' | date:'medium' }}</span>
+          </div>
+          <span style="padding: 4px 12px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; text-transform: uppercase; border: 1px solid;"
+                [style.borderColor]="getOrderStatusColor(o.status)"
+                [style.color]="getOrderStatusColor(o.status)">
+            {{ getOrderStatusLabel(o.status) }}
+          </span>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.02); padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+          <p style="margin: 0 0 6px; font-size: 0.9rem; color: #bbb;">
+            <strong style="color: #D4AF37;">Cliente:</strong> {{ o.customerName || o.clientName || o.user?.fullName || o.user?.email || 'Cliente verificado' }}
+          </p>
+          <p *ngIf="o.shippingAddress" style="margin: 0; font-size: 0.85rem; color: #888;">
+            <strong>Dirección:</strong> {{ o.shippingAddress }}
+          </p>
+        </div>
+
+        <!-- Items del pedido si existen -->
+        <div *ngIf="o.items && o.items.length > 0" style="margin-bottom: 12px;">
+          <div *ngFor="let item of o.items" style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.88rem; color: #ccc;">
+            <span>{{ item.perfumeName || item.perfume?.name || 'Perfume' }} &times; {{ item.quantity }}</span>
+            <strong style="color: #fff;">${{ item.price || item.subtotal }}</strong>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(212,175,55,0.2);">
+          <div>
+            <span style="color: #888; font-size: 0.85rem;">Total Orden: </span>
+            <strong style="color: #D4AF37; font-size: 1.25rem;">${{ o.totalAmount || o.total || 0 }}</strong>
+          </div>
+          
+          <!-- Botones de transición de estado -->
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <ion-button size="small" fill="outline" color="light" *ngIf="o.status === 'PENDING' || o.status === 'CONFIRMED'" (click)="updateOrderStatusAction(o.id, 'PROCESSING')" [disabled]="orderStatusUpdating">
+              Preparar
+            </ion-button>
+            <ion-button size="small" fill="outline" color="primary" *ngIf="o.status === 'PROCESSING'" (click)="updateOrderStatusAction(o.id, 'SHIPPED')" [disabled]="orderStatusUpdating">
+              Enviar
+            </ion-button>
+            <ion-button size="small" color="success" *ngIf="o.status === 'SHIPPED'" (click)="updateOrderStatusAction(o.id, 'DELIVERED')" [disabled]="orderStatusUpdating">
+              Entregar
+            </ion-button>
+          </div>
+        </div>
+      </ion-card>
+
+      <!-- Paginación -->
+      <div *ngIf="ordersTotalPages > 1" style="display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 16px;">
+        <ion-button size="small" fill="outline" (click)="loadOrders(ordersPage - 1)" [disabled]="ordersPage === 0">
+          Anterior
+        </ion-button>
+        <span style="color: #D4AF37; font-size: 0.9rem;">Página {{ ordersPage + 1 }} de {{ ordersTotalPages }}</span>
+        <ion-button size="small" fill="outline" (click)="loadOrders(ordersPage + 1)" [disabled]="ordersPage >= ordersTotalPages - 1">
+          Siguiente
+        </ion-button>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!isOrdersLoading && orders.length === 0" class="empty-state" style="text-align: center; padding: 48px 16px; color: #888;">
+      <ion-icon name="cart-outline" style="font-size: 56px; color: #D4AF37; margin-bottom: 12px;"></ion-icon>
+      <h3 style="color: #fff; margin-bottom: 6px;">No hay pedidos registrados</h3>
+      <p>Cuando los clientes compren tus fragancias, aparecerán aquí para gestionar sus envíos.</p>
     </div>
   </div>
 </ion-content>

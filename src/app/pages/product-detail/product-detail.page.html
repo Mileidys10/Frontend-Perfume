@@ -16,10 +16,32 @@
 </ion-header>
 
 <ion-content class="product-detail">
-  <!-- Loading State -->
-  <div *ngIf="isLoading" class="loading-container">
-    <ion-spinner></ion-spinner>
-    <p>Cargando producto...</p>
+  <!-- Loading State with Skeleton Screen -->
+  <div *ngIf="isLoading" class="detail-wrapper skeleton-wrapper" style="padding: 16px;">
+    <div class="product-layout">
+      <div class="image-section" style="display: flex; justify-content: center; align-items: center; min-height: 320px; background: rgba(255,255,255,0.03); border-radius: 12px;">
+        <ion-skeleton-text [animated]="true" style="width: 240px; height: 280px; border-radius: 12px;"></ion-skeleton-text>
+      </div>
+      <div class="info-section">
+        <div class="header-info" style="margin-bottom: 16px;">
+          <div style="width: 100%;">
+            <ion-skeleton-text [animated]="true" style="width: 30%; height: 16px; margin-bottom: 8px;"></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 75%; height: 28px; margin-bottom: 16px;"></ion-skeleton-text>
+          </div>
+        </div>
+        <ion-skeleton-text [animated]="true" style="width: 95%; height: 14px; margin-bottom: 8px;"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: 90%; height: 14px; margin-bottom: 8px;"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: 60%; height: 14px; margin-bottom: 24px;"></ion-skeleton-text>
+        <div class="specs-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px;">
+          <ion-skeleton-text [animated]="true" style="height: 60px; border-radius: 8px;"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="height: 60px; border-radius: 8px;"></ion-skeleton-text>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: center;">
+          <ion-skeleton-text [animated]="true" style="width: 120px; height: 36px;"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="flex: 1; height: 48px; border-radius: 8px;"></ion-skeleton-text>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Product Content -->

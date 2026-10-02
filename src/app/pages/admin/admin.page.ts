@@ -9,7 +9,7 @@ import { AdminService, DashboardStats, User, Store, Order } from '../../services
 })
 export class AdminPage implements OnInit {
 
-  selectedTab: 'dashboard' | 'users' | 'stores' | 'orders' | 'products' | 'reports' = 'dashboard';
+  selectedTab: 'dashboard' | 'users' | 'stores' | 'orders' | 'products' | 'reports' | 'moderation' = 'dashboard';
 
   dashboardStats: DashboardStats | null = null;
 
@@ -257,7 +257,7 @@ export class AdminPage implements OnInit {
     }
   }
 
-  selectTab(tab: 'dashboard' | 'users' | 'stores' | 'orders' | 'products' | 'reports') {
+  selectTab(tab: 'dashboard' | 'users' | 'stores' | 'orders' | 'products' | 'reports' | 'moderation') {
     this.selectedTab = tab;
     
     // Load data when switching tabs
@@ -296,5 +296,58 @@ export class AdminPage implements OnInit {
 
   get totalOrderPages(): number {
     return Math.ceil(this.filteredOrders.length / this.itemsPerPage);
+  }
+
+  pendingPerfumes: any[] = [];
+  isModerating = false;
+  moderationFeedback = '';
+
+  loadPendingPerfumes() {
+    this.isLoading = true;
+    this.adminService.getPendingPerfumes().subscribe({
+      next: (perfumes) => {
+        this.pendingPerfumes = perfumes;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Error cargando perfumes pendientes:', err);
+        this.isLoading = false;
+      }
+    });
+  }
+
+  approvePerfume(id: number) {
+    this.isModerating = true;
+    this.adminService.approvePerfume(id).subscribe({
+      next: () => {
+        this.pendingPerfumes = this.pendingPerfumes.filter(p => p.id !== id);
+        this.moderationFeedback = `Perfume #${id} aprobado exitosamente.`;
+        this.isModerating = false;
+        setTimeout(() => this.moderationFeedback = '', 3500);
+      },
+      error: (err) => {
+        this.moderationFeedback = `Error al aprobar perfume #${id}.`;
+        this.isModerating = false;
+        setTimeout(() => this.moderationFeedback = '', 3500);
+      }
+    });
+  }
+
+  rejectPerfume(id: number) {
+    const reason = prompt('Ingrese el motivo del rechazo:', 'No cumple con las políticas de calidad') || 'No cumple con los requisitos';
+    this.isModerating = true;
+    this.adminService.rejectPerfume(id, reason).subscribe({
+      next: () => {
+        this.pendingPerfumes = this.pendingPerfumes.filter(p => p.id !== id);
+        this.moderationFeedback = `Perfume #${id} rechazado.`;
+        this.isModerating = false;
+        setTimeout(() => this.moderationFeedback = '', 3500);
+      },
+      error: (err) => {
+        this.moderationFeedback = `Error al rechazar perfume #${id}.`;
+        this.isModerating = false;
+        setTimeout(() => this.moderationFeedback = '', 3500);
+      }
+    });
   }
 }

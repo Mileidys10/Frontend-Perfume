@@ -30,7 +30,8 @@ export class SellerPage implements OnInit {
     { id: 'overview', name: 'Resumen', icon: 'grid', count: 0 },
     { id: 'perfumes', name: 'Perfumes', icon: 'flask', count: 0 },
     { id: 'brands', name: 'Marcas', icon: 'business', count: 0 },
-    { id: 'categories', name: 'Categorías', icon: 'list', count: 0 }
+    { id: 'categories', name: 'Categorías', icon: 'list', count: 0 },
+    { id: 'orders', name: 'Pedidos', icon: 'cart', count: 0 }
   ];
 
   // Filtros
@@ -191,6 +192,9 @@ export class SellerPage implements OnInit {
   // ============= NAVEGACIÓN ENTRE TABS =============
   onTabChange(event: any) {
     this.activeTab = event.detail.value;
+    if (this.activeTab === 'orders' && this.orders.length === 0) {
+      this.loadOrders();
+    }
   }
 
   switchToTab(tabId: string) {
@@ -684,5 +688,101 @@ export class SellerPage implements OnInit {
 
   onBackClick() {
     this.router.navigate(['/home']);
+  }
+
+  // ============= GESTIÓN DE PEDIDOS (TASK T2.1) =============
+  orders: any[] = [];
+  ordersPage = 0;
+  ordersTotalPages = 1;
+  ordersTotal = 0;
+  ordersStatusFilter = 'ALL';
+  isOrdersLoading = false;
+  orderStatusUpdating = false;
+  orderFeedback = '';
+
+  loadOrders(page: number = 0, status?: string) {
+    this.isOrdersLoading = true;
+    this.ordersPage = page;
+    const filter = (status !== undefined) ? status : (this.ordersStatusFilter !== 'ALL' ? this.ordersStatusFilter : undefined);
+    
+    this.sellerService.getSellerOrders(page, 10, filter).subscribe({
+      next: (res) => {
+        if (res && res.status === 'success') {
+          this.orders = res.data || [];
+          if (res.meta) {
+            this.ordersTotal = res.meta.total || 0;
+            this.ordersTotalPages = res.meta.totalPages || 1;
+          }
+        } else if (Array.isArray(res)) {
+          this.orders = res;
+          this.ordersTotal = res.length;
+        } else {
+          this.orders = [];
+        }
+        
+        const ordersTab = this.tabs.find(t => t.id === 'orders');
+        if (ordersTab) {
+          ordersTab.count = this.ordersTotal;
+        }
+        this.isOrdersLoading = false;
+      },
+      error: (err) => {
+        console.error('Error al cargar órdenes de vendedor:', err);
+        this.orders = [];
+        this.isOrdersLoading = false;
+      }
+    });
+  }
+
+  filterOrdersByStatus(status: string) {
+    this.ordersStatusFilter = status;
+    this.loadOrders(0, status === 'ALL' ? undefined : status);
+  }
+
+  updateOrderStatusAction(orderId: number, newStatus: string) {
+    this.orderStatusUpdating = true;
+    this.sellerService.updateSellerOrderStatus(orderId, newStatus).subscribe({
+      next: () => {
+        this.orderFeedback = `Pedido #${orderId} actualizado a ${this.getOrderStatusLabel(newStatus)}.`;
+        this.orderStatusUpdating = false;
+        this.loadOrders(this.ordersPage);
+        setTimeout(() => this.orderFeedback = '', 3500);
+      },
+      error: (err) => {
+        console.error('Error actualizando pedido:', err);
+        this.orderFeedback = `Error al actualizar pedido #${orderId}.`;
+        this.orderStatusUpdating = false;
+        setTimeout(() => this.orderFeedback = '', 3500);
+      }
+    });
+  }
+
+  getOrderStatusColor(status: string): string {
+    switch ((status || '').toUpperCase()) {
+      case 'PENDING':
+      case 'CONFIRMED':
+        return '#D4AF37'; // Dorado
+      case 'PROCESSING':
+      case 'SHIPPED':
+        return '#FFFFFF'; // Blanco
+      case 'DELIVERED':
+        return '#2dd36f'; // Verde
+      case 'CANCELLED':
+        return '#eb445a'; // Rojo
+      default:
+        return '#B8860B';
+    }
+  }
+
+  getOrderStatusLabel(status: string): string {
+    switch ((status || '').toUpperCase()) {
+      case 'PENDING': return 'Pendiente';
+      case 'CONFIRMED': return 'Confirmado';
+      case 'PROCESSING': return 'En Preparación';
+      case 'SHIPPED': return 'Enviado';
+      case 'DELIVERED': return 'Entregado';
+      case 'CANCELLED': return 'Cancelado';
+      default: return status || 'Pendiente';
+    }
   }
 }

@@ -13,6 +13,7 @@ import { CardComponent } from './components/card/card.component';
 import { HeaderButtonsComponent } from './components/header-buttons/header-buttons.component';
 import { SearchbarComponent } from './components/searchbar/searchbar.component';
 import { ModerationBadgeComponent } from './components/moderation-badge/moderation-badge.component';
+import { TruncatePipe } from '../pipes/TruncatePipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ModerationBadgeComponent } from './components/moderation-badge/moderati
     ImageUploadComponent,
     ModerationBadgeComponent,
     HeaderButtonsComponent,  // Agregar este
-    SearchbarComponent       // Agregar este
+    SearchbarComponent,       // Agregar este
+    TruncatePipe
   ],
   imports: [
     CommonModule,
@@ -44,6 +46,7 @@ import { ModerationBadgeComponent } from './components/moderation-badge/moderati
     ModerationBadgeComponent,
     HeaderButtonsComponent,  // Agregar este
     SearchbarComponent,      // Agregar este
+    TruncatePipe,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
