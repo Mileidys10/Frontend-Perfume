@@ -1,3 +1,4 @@
+import { environment } from '../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, BehaviorSubject } from 'rxjs';
@@ -64,7 +65,7 @@ export interface LoginResponse {
   providedIn: 'root'
 })
 export class AdminService {
-  private API_URL = 'http://localhost:8080/api';
+  private API_URL = `${environment.apiUrl}/api`;
   private currentUserSubject = new BehaviorSubject<any>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
 

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { NoPreloading, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guards';
 import { RoleGuard } from './guards/role.guard';
 
@@ -77,13 +77,13 @@ const routes: Routes = [
   // Ruta comodín para 404 - debe ser la última
   {
     path: '**',
-    redirectTo: 'home'
+    loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundPageModule)
   }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: NoPreloading })
   ],
   exports: [RouterModule]
 })

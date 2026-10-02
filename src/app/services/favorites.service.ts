@@ -20,7 +20,7 @@ export class FavoritesService {
       'Content-Type': 'application/json'
     });
 
-    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+    const token = localStorage.getItem('authToken');
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);
     }

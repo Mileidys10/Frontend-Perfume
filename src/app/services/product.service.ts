@@ -55,7 +55,6 @@ export class ProductService {
     return this.http.get<any>(`${API_URL}/perfumes`, { params })
       .pipe(
         map(response => {
-          console.log('Perfumes API Response:', response);
           if (response && response.status === 'success' && response.data) {
             return response.data.map((perfume: any) => this.mapPerfumeToFrontend(perfume));
           }
@@ -70,7 +69,6 @@ export class ProductService {
     return this.http.get<any>(`${API_URL}/perfumes/public/${id}`)
       .pipe(
         map(response => {
-          console.log('Product by ID API Response:', response);
           if (response && response.status === 'success' && response.data) {
             return this.mapPerfumeToFrontend(response.data);
           }
@@ -86,7 +84,6 @@ export class ProductService {
     return this.http.get(`${API_URL}/brands/public`, { responseType: 'text' })
       .pipe(
         map(responseText => {
-          console.log('Raw Brands API Response:', responseText);
           
           try {
             // Si la respuesta es un string que contiene JSON, parsearlo
@@ -99,8 +96,6 @@ export class ProductService {
               // Parsear el string como JSON
               parsedResponse = JSON.parse(responseText);
             }
-            
-            console.log('Parsed Brands Response:', parsedResponse);
             
             // Extraer los datos según diferentes posibles estructuras
             if (parsedResponse && parsedResponse.status === 'success' && parsedResponse.data) {
@@ -168,7 +163,6 @@ export class ProductService {
     return this.http.get<any>(`${API_URL}/brands/public/${brandId}/perfumes`)
       .pipe(
         map(response => {
-          console.log('Brand perfumes API Response:', response);
           if (response && response.status === 'success' && response.data) {
             return response.data.map((perfume: any) => this.mapPerfumeToFrontend(perfume));
           }
@@ -184,7 +178,6 @@ export class ProductService {
     return this.http.get<any>(`${API_URL}/categories/public`)
       .pipe(
         map(response => {
-          console.log('Categories API Response:', response);
           if (response && response.status === 'success' && response.data) {
             return response.data;
           }

@@ -36,6 +36,29 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
 
+
+// ── Perfume Store Design System ─────────────────────────────────────────────
+:root {
+  --gold-primary: #D4AF37;
+  --gold-dark: #B8860B;
+  --gold-accent: #F5D77D;
+  --surface-dark: #0A0A0A;
+  --surface-card: #1A1A1A;
+  --surface-elevated: #242424;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --gold-border: rgba(212, 175, 55, 0.3);
+  --gold-shadow: rgba(212, 175, 55, 0.15);
+}
+
+ion-app {
+  background: var(--surface-dark);
+}
+
+ion-content {
+  --background: var(--surface-dark);
+  --color: #ffffff;
+}
+
 // Estilos personalizados para Modal de Filtros
 .filter-modal {
   --width: 100%;
@@ -44,21 +67,22 @@
   --box-shadow: none;
 
   ion-content {
-    --background: #ffffff;
+    --background: var(--surface-card);
+    --color: #ffffff;
   }
 
   ion-toolbar {
-    --background: #ffffff;
-    --border-bottom: 1px solid #e0e0e0;
+    --background: var(--surface-card);
+    --border-bottom: 1px solid var(--gold-border);
   }
 
   ion-title {
     font-weight: 600;
-    color: #000000;
+    color: var(--gold-primary);
   }
 
   ion-icon {
-    color: #000000;
+    color: var(--gold-primary);
   }
 }
 
@@ -79,7 +103,8 @@
 // Global styles for ion-toolbar
 ion-header {
   ion-toolbar {
-    --background: #ffffff;
-    --border-bottom: 1px solid #e0e0e0;
+    --background: var(--surface-card);
+    --border-bottom: 1px solid var(--gold-border);
+    --color: var(--gold-primary);
   }
 }

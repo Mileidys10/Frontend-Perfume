@@ -63,7 +63,6 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, loginData)
       .pipe(
         tap(response => {
-          console.log('Respuesta REAL del login:', response);
           
           // Mapear la respuesta del backend (español) a nuestra interfaz (inglés)
           if (response.token && response.usuario) {
@@ -79,9 +78,6 @@ export class AuthService {
             
             localStorage.setItem('authToken', response.token);
             localStorage.setItem('userData', JSON.stringify(userData));
-            
-            console.log('Token guardado:', response.token);
-            console.log('User data mapeado y guardado:', userData);
           }
         }),
         catchError((error: HttpErrorResponse) => {
@@ -111,12 +107,9 @@ export class AuthService {
       role: registerData.role?.toUpperCase() || 'CLIENTE'
     };
     
-    console.log('Enviando datos de registro SIN username:', dataToSend);
-    
     return this.http.post<RegisterResponse>(`${this.apiUrl}/register`, dataToSend)
       .pipe(
         tap(response => {
-          console.log('Respuesta del registro:', response);
         }),
         catchError((error: HttpErrorResponse) => {
           console.error('Error en registro:', error);
@@ -140,7 +133,6 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('authToken');
     localStorage.removeItem('userData');
-    console.log('Usuario cerró sesión');
   }
 
   getToken(): string | null {

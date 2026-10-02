@@ -54,11 +54,8 @@ export class CheckoutService {
     const url = `${this.baseUrl}/api/orders/checkout`;
     const headers = this.getHeaders();
     
-    console.log('Sending checkout data:', checkoutData);
-    
     return this.http.post<OrderResponse>(url, checkoutData, { headers }).pipe(
       map(response => {
-        console.log('Checkout response:', response);
         return response;
       })
     );
@@ -108,7 +105,7 @@ export class CheckoutService {
       'Content-Type': 'application/json'
     });
 
-    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+    const token = localStorage.getItem('authToken');
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);
     }
