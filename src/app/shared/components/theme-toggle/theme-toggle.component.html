@@ -1,0 +1,15 @@
+<button 
+  class="luxury-theme-toggle" 
+  (click)="onToggle()" 
+  [attr.aria-label]="(theme$ | async) === 'midnight' ? 'Cambiar a modo Ivory Alabaster' : 'Cambiar a modo Midnight Obsidian'"
+  [title]="(theme$ | async) === 'midnight' ? 'Modo Ivory Alabaster' : 'Modo Midnight Obsidian'">
+  <div class="toggle-track" [class.is-ivory]="(theme$ | async) === 'ivory'">
+    <span class="icon moon-icon" *ngIf="(theme$ | async) === 'midnight'">
+      <ion-icon name="moon"></ion-icon>
+    </span>
+    <span class="icon sun-icon" *ngIf="(theme$ | async) === 'ivory'">
+      <ion-icon name="sunny"></ion-icon>
+    </span>
+    <span class="theme-label">{{ (theme$ | async) === 'midnight' ? 'Midnight' : 'Ivory' }}</span>
+  </div>
+</button>

@@ -12,6 +12,12 @@ export interface CartItem {
   sizeMl: number;
   quantity: number;
   perfumeId?: number;
+  // Personalización V2 Haute Parfumerie
+  engravingText?: string;
+  engravingFont?: string;
+  isCustomized?: boolean;
+  discoveryBoxItems?: string[];
+  isBundle?: boolean;
 }
 
 @Injectable({

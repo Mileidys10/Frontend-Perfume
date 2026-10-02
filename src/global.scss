@@ -108,3 +108,47 @@ ion-header {
     --color: var(--gold-primary);
   }
 }
+// ✦ Theme Ivory Alabaster (Sprint 5 - RF-20) ✦
+body.theme-ivory {
+  --gold-primary: #B76E79;       // Rose Gold Champagne
+  --gold-dark: #8C4853;
+  --gold-accent: #E5A9B4;
+  --surface-dark: #FDFBF7;      // Alabaster Marble
+  --surface-card: #FFFFFF;
+  --surface-elevated: #F6F1EA;
+  --text-muted: rgba(40, 40, 40, 0.65);
+  --gold-border: rgba(183, 110, 121, 0.28);
+  --gold-shadow: rgba(183, 110, 121, 0.15);
+
+  ion-app {
+    background: #FDFBF7;
+  }
+
+  ion-content {
+    --background: #FDFBF7;
+    --color: #1A1A1A;
+  }
+
+  ion-header ion-toolbar {
+    --background: #FFFFFF;
+    --border-bottom: 1px solid var(--gold-border);
+    --color: #8C4853;
+  }
+
+  .detail-wrapper, .filter-sidebar, .product-card, .price-box {
+    background: #FFFFFF !important;
+    color: #1A1A1A !important;
+  }
+
+  .title, h1, h2, h3 {
+    color: #2A1B1F !important;
+  }
+
+  .brand, .spec-label {
+    color: var(--gold-dark) !important;
+  }
+
+  .description, .spec-value {
+    color: #333333 !important;
+  }
+}

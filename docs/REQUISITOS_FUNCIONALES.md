@@ -249,7 +249,7 @@
 | ID | RF-15 |
 | Nombre | Pirámide Olfativa Interactiva Vectorial |
 | Prioridad | Alta |
-| Estado | Diseñado / Planificado (Sprint 5) |
+| Estado | Implementado y Verificado |
 
 **Descripción:** En la vista de detalle de perfume (`product-detail`), se despliega una pirámide olfativa interactiva desarrollada en SVG vectorial que desglosa visualmente las tres fases de evaporación de la fragancia:
 - **Notas de Salida (Top Notes, 0 a 15 min):** Cítricos chispeantes, pimienta rosa, bergamota de Calabria.
@@ -267,7 +267,7 @@ Al interactuar (hover o tap) con cada estrato de la pirámide, se produce un hal
 | ID | RF-16 |
 | Nombre | Sommelier Olfativo IA y Quiz Sensorial |
 | Prioridad | Alta |
-| Estado | Diseñado / Planificado (Sprint 5) |
+| Estado | Implementado y Verificado |
 
 **Descripción:** Módulo consultivo interactivo de 4 pasos guiado por un sommelier digital que acompaña al usuario para identificar su fragancia firma:
 1. **Ocasión & Atmósfera:** Gala nocturna, alta ejecutiva, romance íntimo, escapada de verano.
@@ -286,7 +286,7 @@ El algoritmo calcula un índice de afinidad porcentual ("98% Match con tu esenci
 | ID | RF-17 |
 | Nombre | Grabado Láser Personalizado en Frasco |
 | Prioridad | Alta |
-| Estado | Diseñado / Planificado (Sprint 6) |
+| Estado | Implementado y Verificado |
 
 **Descripción:** Estudio de personalización en tiempo real en la ficha de producto que permite al cliente inmortalizar sus iniciales, nombre o una fecha conmemorativa (hasta 15 caracteres) sobre el cristal del frasco de perfume.
 - **Tipografías de Lujo:** Selección entre *Serif Imperial*, *Script Royal* y *Sans Minimalist*.
@@ -302,7 +302,7 @@ El algoritmo calcula un índice de afinidad porcentual ("98% Match con tu esenci
 | ID | RF-18 |
 | Nombre | Simulador de Mezcla y Layering de Fragancias |
 | Prioridad | Media |
-| Estado | Diseñado / Planificado (Sprint 6) |
+| Estado | Implementado y Verificado |
 
 **Descripción:** Simulador de arte olfativo que permite a los usuarios seleccionar dos fragancias del catálogo y experimentar con su combinación (*layering*).
 - **Radar de Compatibilidad:** Analiza la complementariedad de notas entre ambos perfumes (ejemplo: fondo de oud amaderado denso combinado con salida floral cítrica chispeante).
@@ -318,7 +318,7 @@ El algoritmo calcula un índice de afinidad porcentual ("98% Match con tu esenci
 | ID | RF-19 |
 | Nombre | Rastreo de Guante Blanco y Sello de Lacre |
 | Prioridad | Alta |
-| Estado | Diseñado / Planificado (Sprint 6) |
+| Estado | Implementado y Verificado |
 
 **Descripción:** En el detalle de cada orden, el cliente accede a una línea de tiempo boutique con estética de joyería de alta gama que ilustra el proceso artesanal de preparación en 5 etapas:
 1. **Sello de Lacre & Selección:** Extracción desde cámara climatizada y aplicación de sello de cera roja lacrada.
@@ -337,7 +337,7 @@ Incluye visualización del *Batch Code* del perfumista verificado y descarga del
 | ID | RF-20 |
 | Nombre | Conmutador de Temas de Ultralujo |
 | Prioridad | Media |
-| Estado | Diseñado / Planificado (Sprint 5) |
+| Estado | Implementado y Verificado |
 
 **Descripción:** Selector estético de alta costura accesible desde el encabezado que permite alternar la interfaz entre dos identidades visuales:
 - **Midnight Obsidian:** Fondo ébano profundo (`#0A0A0A`), acentos en oro cepillado de 24K (`#D4AF37`), cristales ahumados y micro-partículas doradas.

@@ -36,6 +36,14 @@
         <ion-label class="item-info">
           <h3>{{ item.name }}</h3>
           <p class="item-brand">{{ item.brandName }} - {{ item.sizeMl }}ml</p>
+          <div *ngIf="item.isCustomized" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(212, 175, 55, 0.15); border: 1px solid var(--gold-border); padding: 2px 8px; border-radius: 4px; font-size: 11px; color: var(--gold-primary); margin: 3px 0;">
+            <ion-icon name="create-outline"></ion-icon>
+            Grabado: <strong>"{{ item.engravingText }}"</strong> ({{ item.engravingFont }})
+          </div>
+          <div *ngIf="item.isBundle" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(76, 217, 100, 0.15); border: 1px solid rgba(76, 217, 100, 0.3); padding: 2px 8px; border-radius: 4px; font-size: 11px; color: #4cd964; margin: 3px 0;">
+            <ion-icon name="color-filter-outline"></ion-icon>
+            Bundle Layering (15% OFF)
+          </div>
           <p class="item-price">{{ item.price | currency:'USD':'symbol':'1.2-2' }}</p>
         </ion-label>
 

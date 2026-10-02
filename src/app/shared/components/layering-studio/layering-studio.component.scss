@@ -1,0 +1,273 @@
+.layering-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(12px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.layering-modal-container {
+  background: #111111;
+  border: 1px solid var(--gold-border);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 740px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.7);
+  padding: 24px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  padding-bottom: 14px;
+
+  .title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .gold-icon {
+      font-size: 24px;
+      color: var(--gold-primary);
+    }
+
+    .title {
+      font-family: 'Cinzel', 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--gold-primary);
+      margin: 0;
+    }
+
+    .subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+  }
+
+  .close-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 24px;
+    cursor: pointer;
+
+    &:hover { color: var(--gold-primary); }
+  }
+}
+
+.blending-stage {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  align-items: center;
+  margin: 20px 0;
+
+  @media (min-width: 600px) {
+    grid-template-columns: 1fr auto 1fr;
+  }
+
+  .blend-bottle-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--gold-border);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .bottle-badge {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gold-primary);
+      background: rgba(212, 175, 55, 0.1);
+      padding: 3px 10px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+
+    .blend-bottle-img {
+      width: 100px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+
+    .bottle-name {
+      font-size: 0.95rem;
+      color: #FFFFFF;
+      margin: 4px 0 2px;
+      font-weight: 600;
+    }
+
+    .bottle-notes {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .bottle-selector {
+      width: 100%;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 8px;
+
+      .selector-label {
+        display: block;
+        font-size: 10px;
+        color: var(--text-muted);
+        margin-bottom: 4px;
+      }
+
+      .pills-row {
+        display: flex;
+        gap: 6px;
+        justify-content: center;
+
+        .mini-pill {
+          background: rgba(255, 255, 255, 0.04);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          color: #DDD;
+          font-size: 10px;
+          padding: 4px 8px;
+          border-radius: 6px;
+          cursor: pointer;
+
+          &.active {
+            border-color: var(--gold-primary);
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--gold-primary);
+          }
+        }
+      }
+    }
+  }
+
+  .fusion-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    .fusion-symbol {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(212, 175, 55, 0.2);
+      border: 1px solid var(--gold-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-primary);
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .harmony-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .harmony-score {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: var(--gold-accent);
+      }
+
+      .harmony-text {
+        font-size: 9px;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        letter-spacing: 0.5px;
+      }
+    }
+  }
+}
+
+.application-formula-card {
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid var(--gold-border);
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 20px;
+
+  .formula-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--gold-primary);
+    margin-bottom: 6px;
+  }
+
+  .formula-instructions {
+    font-size: 0.82rem;
+    color: #E0E0E0;
+    line-height: 1.45;
+    margin: 0;
+
+    strong { color: #FFFFFF; }
+    em { color: var(--gold-accent); font-style: normal; font-weight: 600; }
+  }
+}
+
+.studio-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  padding-top: 16px;
+
+  .pricing-wrap {
+    .original-price {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .bundle-price {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      .tag {
+        font-size: 11px;
+        color: #4cd964;
+        font-weight: bold;
+      }
+
+      .price-val {
+        font-size: 1.3rem;
+        color: var(--gold-primary);
+        font-weight: bold;
+      }
+    }
+  }
+
+  .add-duo-btn {
+    background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+    border: none;
+    color: #000;
+    font-weight: 700;
+    padding: 10px 18px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px var(--gold-shadow);
+    }
+  }
+}

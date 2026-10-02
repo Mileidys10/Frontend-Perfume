@@ -23,6 +23,28 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <!-- ✦ Haute Parfumerie Experience Banner (Sprint 5 & 6) ✦ -->
+  <div class="luxury-experience-bar" style="margin: 16px; padding: 18px; border-radius: 14px; background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(10, 10, 10, 0.85)); border: 1px solid var(--gold-border); box-shadow: 0 4px 20px rgba(0,0,0,0.4);">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div>
+        <span style="font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-primary); font-weight: bold;">Haute Parfumerie Atelier</span>
+        <h3 style="margin: 4px 0 2px; font-family: 'Cinzel', serif; font-size: 1.2rem; color: #FFFFFF;">Experiencias Olfativas Exclusivas</h3>
+        <p style="margin: 0; font-size: 0.82rem; color: var(--text-muted);">Descubre tu esencia con IA, arma tu cofre de muestras o crea alquimia con acordes.</p>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button style="background: rgba(212, 175, 55, 0.18); border: 1px solid var(--gold-primary); color: var(--gold-primary); padding: 8px 14px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;" (click)="openSommelier()">
+          <ion-icon name="sparkles"></ion-icon> Sommelier IA
+        </button>
+        <button style="background: rgba(212, 175, 55, 0.18); border: 1px solid var(--gold-primary); color: var(--gold-primary); padding: 8px 14px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;" (click)="openDiscoveryBox()">
+          <ion-icon name="gift-outline"></ion-icon> Cofre Discovery (5 Muestras)
+        </button>
+        <button style="background: rgba(212, 175, 55, 0.18); border: 1px solid var(--gold-primary); color: var(--gold-primary); padding: 8px 14px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;" (click)="openLayering()">
+          <ion-icon name="color-filter-outline"></ion-icon> Layering Studio
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Overlay para filtros -->
   <div class="filter-overlay" *ngIf="showFilters" (click)="showFilters = false"></div>
 
@@ -223,4 +245,9 @@
       </ion-button>
     </div>
   </div>
+
+  <!-- ✦ Modales V2 en Home ✦ -->
+  <app-sommelier-quiz *ngIf="showSommelierModal" (closeQuiz)="closeSommelier()"></app-sommelier-quiz>
+  <app-discovery-box *ngIf="showDiscoveryBoxModal" (closeBox)="closeDiscoveryBox()"></app-discovery-box>
+  <app-layering-studio *ngIf="showLayeringModal" (closeStudio)="closeLayering()"></app-layering-studio>
 </ion-content>

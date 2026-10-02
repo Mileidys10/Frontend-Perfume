@@ -1,0 +1,106 @@
+<div class="luxury-timeline-wrapper">
+  <!-- Card Header -->
+  <div class="timeline-header">
+    <div class="header-info">
+      <span class="badge-white-glove">Servicio Guante Blanco</span>
+      <h3 class="order-code">Pedido #{{ orderId }}</h3>
+      <span class="batch-tag">
+        <ion-icon name="finger-print-outline"></ion-icon>
+        Lote Oficial: <strong>{{ batchCode }}</strong>
+      </span>
+    </div>
+
+    <button class="cert-btn" (click)="openCertificate()">
+      <ion-icon name="document-text-outline"></ion-icon>
+      Ver Certificado de Autenticidad
+    </button>
+  </div>
+
+  <!-- Sello de Lacre Gráfico -->
+  <div class="wax-seal-strip">
+    <div class="wax-seal">
+      <span class="seal-inner">
+        <ion-icon name="ribbon"></ion-icon>
+      </span>
+    </div>
+    <div class="seal-text">
+      <strong>Autenticidad de Alta Perfumería Verificada</strong>
+      <span>Control de calidad de formulación y maceración en Grasse, Francia.</span>
+    </div>
+  </div>
+
+  <!-- Línea de Tiempo de 5 Hitos -->
+  <div class="milestones-track">
+    <div 
+      *ngFor="let m of milestones" 
+      class="milestone-item"
+      [class.completed]="m.completed"
+      [class.current]="m.current">
+      
+      <div class="milestone-indicator">
+        <div class="circle">
+          <ion-icon [name]="m.completed ? 'checkmark-sharp' : m.icon"></ion-icon>
+        </div>
+        <div class="connector-line"></div>
+      </div>
+
+      <div class="milestone-content">
+        <div class="milestone-top">
+          <h4 class="m-title">{{ m.title }}</h4>
+          <span class="m-time">{{ m.timeEstimate }}</span>
+        </div>
+        <p class="m-desc">{{ m.subtitle }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Certificado de Autenticidad -->
+  <div class="cert-modal-backdrop" *ngIf="showCertificateModal" (click)="closeCertificate()">
+    <div class="cert-modal-box" (click)="$event.stopPropagation()">
+      <div class="cert-frame">
+        <div class="cert-corner top-left"></div>
+        <div class="cert-corner top-right"></div>
+        <div class="cert-corner bottom-left"></div>
+        <div class="cert-corner bottom-right"></div>
+
+        <div class="cert-header">
+          <span class="cert-crest">HAUTE PARFUMERIE</span>
+          <h2 class="cert-title">Certificado de Autenticidad</h2>
+          <span class="cert-subtitle">Documento de Procedencia y Control de Calidad Noble</span>
+        </div>
+
+        <div class="cert-body">
+          <p class="cert-statement">
+            Se certifica formalmente que la creación correspondiente al pedido <strong>#{{ orderId }}</strong> ha sido formulada con esencias puras de destilación botánica noble bajo los más estrictos estándares de la perfumería internacional.
+          </p>
+
+          <div class="cert-meta-grid">
+            <div class="meta-item">
+              <span class="lbl">Cliente Registrado:</span>
+              <span class="val">{{ customerName }}</span>
+            </div>
+            <div class="meta-item">
+              <span class="lbl">Código de Lote (Batch Code):</span>
+              <span class="val font-mono">{{ batchCode }}</span>
+            </div>
+            <div class="meta-item">
+              <span class="lbl">Grado de Concentración:</span>
+              <span class="val">Extrait de Parfum (28% Aceites Puros)</span>
+            </div>
+            <div class="meta-item">
+              <span class="lbl">Firma del Maestro Perfumista:</span>
+              <span class="val font-cursive">Antoine de Grasse</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cert-actions">
+          <button class="cert-print-btn" (click)="printCertificate()">
+            <ion-icon name="print-outline"></ion-icon> Imprimir Certificado
+          </button>
+          <button class="cert-close-btn" (click)="closeCertificate()">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

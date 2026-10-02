@@ -17,6 +17,17 @@ export class HomePage implements OnInit {
   categories: Category[] = [];
   
   showFilters: boolean = false;
+  // ✦ Modales V2 Haute Parfumerie ✦
+  showSommelierModal: boolean = false;
+  showDiscoveryBoxModal: boolean = false;
+  showLayeringModal: boolean = false;
+
+  openSommelier(): void { this.showSommelierModal = true; }
+  closeSommelier(): void { this.showSommelierModal = false; }
+  openDiscoveryBox(): void { this.showDiscoveryBoxModal = true; }
+  closeDiscoveryBox(): void { this.showDiscoveryBoxModal = false; }
+  openLayering(): void { this.showLayeringModal = true; }
+  closeLayering(): void { this.showLayeringModal = false; }
   filterCategory: string[] = [];
   filterBrand: string[] = [];
   filterSize: string[] = [];

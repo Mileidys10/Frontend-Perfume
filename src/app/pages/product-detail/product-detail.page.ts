@@ -1,3 +1,4 @@
+import { SharedModule } from '../../shared/shared-module';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,7 +20,8 @@ import { ProductService } from '../../services/product.service';
   standalone: true,
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    SharedModule
   ]
 })
 export class ProductDetailPage implements OnInit {
@@ -27,6 +29,31 @@ export class ProductDetailPage implements OnInit {
   isFavorite: boolean = false;
   isLoading: boolean = true;
   productId: string | null = null;
+
+  // ✦ Estado V2 Haute Parfumerie ✦
+  engravingConfig: any = null;
+  showSommelierModal: boolean = false;
+  showLayeringModal: boolean = false;
+
+  onEngravingChanged(config: any): void {
+    this.engravingConfig = config;
+  }
+
+  openSommelier(): void {
+    this.showSommelierModal = true;
+  }
+
+  closeSommelier(): void {
+    this.showSommelierModal = false;
+  }
+
+  openLayering(): void {
+    this.showLayeringModal = true;
+  }
+
+  closeLayering(): void {
+    this.showLayeringModal = false;
+  }
 
   constructor(
     private route: ActivatedRoute,

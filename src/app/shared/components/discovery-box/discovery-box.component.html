@@ -1,0 +1,89 @@
+<div class="discovery-modal-backdrop" (click)="onClose()">
+  <div class="discovery-modal-container" (click)="$event.stopPropagation()">
+    <!-- Modal Header -->
+    <div class="modal-header">
+      <div class="title-wrap">
+        <span class="gold-icon"><ion-icon name="gift-outline"></ion-icon></span>
+        <div>
+          <h2 class="title">Cofre Discovery Box</h2>
+          <span class="subtitle">Arma tu set personalizado de 5 muestras nobles (2ml c/u)</span>
+        </div>
+      </div>
+      <button class="close-btn" (click)="onClose()" title="Cerrar">
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+    </div>
+
+    <!-- Banner de Reintegro -->
+    <div class="rebate-banner">
+      <ion-icon name="sparkles" class="rebate-icon"></ion-icon>
+      <div class="rebate-text">
+        <strong>Pruébalo en piel sin riesgo:</strong> Los <strong>${{ rebateCoupon | number:'1.2-2' }} USD</strong> de este cofre se te reembolsan automáticamente en tu próxima compra de cualquier frasco de 100ml.
+      </div>
+    </div>
+
+    <!-- Estuche Visual de 5 Ranuras -->
+    <div class="box-slots-preview">
+      <h4 class="slots-title">Tu Cofre Personalizado ({{ selectedVials.length }}/{{ maxVials }})</h4>
+      <div class="slots-grid">
+        <div 
+          *ngFor="let i of [0, 1, 2, 3, 4]" 
+          class="vial-slot"
+          [class.filled]="selectedVials[i]">
+          <div *ngIf="selectedVials[i]" class="vial-filled">
+            <div class="vial-graphic">
+              <span class="vial-cap"></span>
+              <span class="vial-glass">
+                <span class="liquid"></span>
+              </span>
+            </div>
+            <span class="vial-name">{{ selectedVials[i].name }}</span>
+            <button class="remove-vial-btn" (click)="removeVial(i)" title="Quitar">
+              <ion-icon name="close-circle"></ion-icon>
+            </button>
+          </div>
+          <div *ngIf="!selectedVials[i]" class="vial-empty">
+            <ion-icon name="add-circle-outline"></ion-icon>
+            <span>Ranura {{ i + 1 }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Catálogo de Viales para Elegir -->
+    <div class="vials-catalog">
+      <h4 class="catalog-title">Selecciona los acordes botánicos que deseas probar:</h4>
+      <div class="vials-list">
+        <div 
+          *ngFor="let vial of availableVials" 
+          class="vial-card"
+          [class.selected]="isVialSelected(vial)"
+          (click)="toggleVial(vial)">
+          <div class="vial-info">
+            <span class="vial-brand">{{ vial.brand }}</span>
+            <h5 class="vial-title">{{ vial.name }}</h5>
+            <span class="vial-notes">{{ vial.notes }}</span>
+          </div>
+          <div class="check-box" [class.checked]="isVialSelected(vial)">
+            <ion-icon name="checkmark-sharp" *ngIf="isVialSelected(vial)"></ion-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer con Botón de Compra -->
+    <div class="box-footer">
+      <div class="pricing-summary">
+        <span class="total-label">Inversión Cofre de Lujo:</span>
+        <span class="total-price">{{ boxPrice | currency:'USD' }}</span>
+      </div>
+      <button 
+        class="add-box-btn" 
+        [disabled]="selectedVials.length !== maxVials || isAdded"
+        (click)="addBoxToCart()">
+        <ion-icon name="bag-add-outline"></ion-icon>
+        {{ isAdded ? '¡Cofre Añadido a la Bolsa!' : (selectedVials.length === maxVials ? 'Adquirir Cofre Discovery' : 'Selecciona ' + (maxVials - selectedVials.length) + ' más') }}
+      </button>
+    </div>
+  </div>
+</div>

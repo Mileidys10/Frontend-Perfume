@@ -1,0 +1,85 @@
+<div class="laser-engraving-card">
+  <!-- Header con toggle -->
+  <div class="engraving-header" (click)="toggleEngraving()">
+    <div class="header-left">
+      <span class="laser-icon"><ion-icon name="create-outline"></ion-icon></span>
+      <div>
+        <h4 class="title">Atelier de Grabado Láser</h4>
+        <span class="subtitle">Inmortaliza tu nombre o iniciales en el cristal</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="price-tag">+{{ engravingPrice | currency:'USD' }}</span>
+      <ion-toggle [checked]="isEnabled" (click)="$event.stopPropagation(); toggleEngraving()"></ion-toggle>
+    </div>
+  </div>
+
+  <!-- Controles interactivos cuando está activo -->
+  <div class="engraving-body" *ngIf="isEnabled">
+    <!-- Visualizador del Frasco con Grabado en Tiempo Real -->
+    <div class="bottle-preview-stage">
+      <div class="bottle-silhouette">
+        <img [src]="bottleImageUrl || 'assets/images/placeholder.jpg'" [alt]="perfumeName" class="bottle-img" />
+        <div class="glass-reflection-overlay"></div>
+        <div 
+          class="engraved-plate" 
+          [style.font-family]="getFontFamily()"
+          [class.has-text]="engravingText.length > 0">
+          <span class="engraved-text">{{ engravingText || 'Tus Iniciales' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controles de Edición -->
+    <div class="controls-panel">
+      <!-- Input de Texto -->
+      <div class="input-group">
+        <label class="input-label">
+          Texto a grabar en el frasco:
+          <span class="chars-counter">{{ engravingText.length }}/{{ maxChars }}</span>
+        </label>
+        <input 
+          type="text" 
+          class="luxury-input" 
+          placeholder="Ej: M. DEL VALLE o 2026"
+          [value]="engravingText"
+          [attr.maxlength]="maxChars"
+          (input)="onTextInput($any($event.target).value)" />
+      </div>
+
+      <!-- Selector de Tipografía -->
+      <div class="font-selector-group">
+        <label class="input-label">Tipografía noble artesanal:</label>
+        <div class="font-pills">
+          <button 
+            type="button" 
+            class="font-pill serif-opt" 
+            [class.active]="selectedFont === 'serif'" 
+            (click)="selectFont('serif')">
+            Serif Imperial
+          </button>
+          <button 
+            type="button" 
+            class="font-pill script-opt" 
+            [class.active]="selectedFont === 'script'" 
+            (click)="selectFont('script')">
+            Script Royal
+          </button>
+          <button 
+            type="button" 
+            class="font-pill sans-opt" 
+            [class.active]="selectedFont === 'sans'" 
+            (click)="selectFont('sans')">
+            Sans Minimal
+          </button>
+        </div>
+      </div>
+
+      <!-- Nota de Taller -->
+      <div class="artisan-guarantee">
+        <ion-icon name="ribbon-outline"></ion-icon>
+        <span>Grabado con punta de diamante y sellado térmico de oro de 24K en taller oficial.</span>
+      </div>
+    </div>
+  </div>
+</div>

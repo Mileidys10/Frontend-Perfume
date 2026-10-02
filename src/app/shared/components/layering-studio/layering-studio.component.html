@@ -1,0 +1,98 @@
+<div class="layering-modal-backdrop" (click)="onClose()">
+  <div class="layering-modal-container" (click)="$event.stopPropagation()">
+    <!-- Header -->
+    <div class="modal-header">
+      <div class="title-wrap">
+        <span class="gold-icon"><ion-icon name="color-filter-outline"></ion-icon></span>
+        <div>
+          <h2 class="title">Fragrance Layering Studio</h2>
+          <span class="subtitle">El arte alquímico de combinar dos acordes para una firma irrepetible</span>
+        </div>
+      </div>
+      <button class="close-btn" (click)="onClose()" title="Cerrar">
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+    </div>
+
+    <!-- Escenario de Dos Frascos Alquímicos -->
+    <div class="blending-stage">
+      <!-- Frasco 1: Acorde Base / Fijación -->
+      <div class="blend-bottle-card">
+        <div class="bottle-badge">Paso 1: Acorde de Base</div>
+        <img [src]="selectedBase.imageUrl" [alt]="selectedBase.name" class="blend-bottle-img" />
+        <h4 class="bottle-name">{{ selectedBase.name }}</h4>
+        <span class="bottle-notes">{{ selectedBase.notes }}</span>
+        
+        <div class="bottle-selector">
+          <label class="selector-label">Alternar Base:</label>
+          <div class="pills-row">
+            <button 
+              *ngFor="let p of availablePerfumes.slice(0, 2)" 
+              class="mini-pill"
+              [class.active]="selectedBase.id === p.id"
+              (click)="selectBase(p)">
+              {{ p.name.split(' ')[0] }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Conector / Indicador de Fusión -->
+      <div class="fusion-indicator">
+        <div class="fusion-symbol">+</div>
+        <div class="harmony-badge">
+          <span class="harmony-score">{{ harmonyScore }}%</span>
+          <span class="harmony-text">Armonía Olfativa</span>
+        </div>
+      </div>
+
+      <!-- Frasco 2: Acorde de Aura / Proyección -->
+      <div class="blend-bottle-card">
+        <div class="bottle-badge">Paso 2: Acorde de Aura</div>
+        <img [src]="selectedAura.imageUrl" [alt]="selectedAura.name" class="blend-bottle-img" />
+        <h4 class="bottle-name">{{ selectedAura.name }}</h4>
+        <span class="bottle-notes">{{ selectedAura.notes }}</span>
+
+        <div class="bottle-selector">
+          <label class="selector-label">Alternar Aura:</label>
+          <div class="pills-row">
+            <button 
+              *ngFor="let p of availablePerfumes.slice(2, 4)" 
+              class="mini-pill"
+              [class.active]="selectedAura.id === p.id"
+              (click)="selectAura(p)">
+              {{ p.name.split(' ')[0] }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Receta de Aplicación Magistral -->
+    <div class="application-formula-card">
+      <div class="formula-header">
+        <ion-icon name="sparkles"></ion-icon>
+        <strong>Fórmula de Aplicación en Piel Recomendada:</strong>
+      </div>
+      <p class="formula-instructions">
+        Aplica <strong>2 pulverizaciones</strong> de <em>{{ selectedBase.name }}</em> en muñecas y cuello para anclar la profundidad amaderada. Aguarda 60 segundos y vaporiza <strong>3 pulverizaciones</strong> de <em>{{ selectedAura.name }}</em> sobre clavícula y cabello para crear un aura radiante en movimiento.
+      </p>
+    </div>
+
+    <!-- Footer con Precio Bundle y Botón -->
+    <div class="studio-footer">
+      <div class="pricing-wrap">
+        <div class="original-price">Precio individual: <s>{{ getRawTotal() | currency:'USD' }}</s></div>
+        <div class="bundle-price">
+          <span class="tag">15% OFF Dúo:</span>
+          <span class="price-val">{{ getDiscountedTotal() | currency:'USD' }}</span>
+        </div>
+      </div>
+
+      <button class="add-duo-btn" (click)="addDuoToCart()" [disabled]="isAdded">
+        <ion-icon name="bag-add-outline"></ion-icon>
+        {{ isAdded ? '¡Dúo de Acordes Añadido!' : 'Adquirir Dúo de Acordes' }}
+      </button>
+    </div>
+  </div>
+</div>

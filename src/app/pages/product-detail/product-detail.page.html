@@ -75,6 +75,28 @@
 
         <p class="description">{{ product.description }}</p>
 
+        <!-- ✦ V2 Pirámide Olfativa Interactiva SVG (RF-15) ✦ -->
+        <app-olfactory-pyramid [perfumeName]="product.name"></app-olfactory-pyramid>
+
+        <!-- ✦ V2 Atelier de Grabado Láser en Frasco (RF-17) ✦ -->
+        <app-laser-engraving 
+          [bottleImageUrl]="product.imageUrl" 
+          [perfumeName]="product.name"
+          (engravingChanged)="onEngravingChanged($event)">
+        </app-laser-engraving>
+
+        <!-- ✦ Botones de Experiencia Sensorial ✦ -->
+        <div style="display: flex; gap: 8px; margin: 12px 0;">
+          <ion-button fill="outline" size="small" style="flex: 1; --border-color: var(--gold-border); --color: var(--gold-primary);" (click)="openSommelier()">
+            <ion-icon slot="start" name="sparkles"></ion-icon>
+            Sommelier IA
+          </ion-button>
+          <ion-button fill="outline" size="small" style="flex: 1; --border-color: var(--gold-border); --color: var(--gold-primary);" (click)="openLayering()">
+            <ion-icon slot="start" name="color-filter"></ion-icon>
+            Layering Studio
+          </ion-button>
+        </div>
+
         <div class="specs-grid">
           <div class="spec-item">
             <span class="spec-label">Tamaño</span>
@@ -147,4 +169,8 @@
       Volver al Inicio
     </ion-button>
   </div>
+
+  <!-- ✦ Modales Sensoriales V2 ✦ -->
+  <app-sommelier-quiz *ngIf="showSommelierModal" (closeQuiz)="closeSommelier()"></app-sommelier-quiz>
+  <app-layering-studio *ngIf="showLayeringModal" (closeStudio)="closeLayering()"></app-layering-studio>
 </ion-content>

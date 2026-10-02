@@ -1,0 +1,116 @@
+<div class="sommelier-modal-backdrop" (click)="onClose()">
+  <div class="sommelier-modal-container" (click)="$event.stopPropagation()">
+    <!-- Header -->
+    <div class="modal-header">
+      <div class="luxury-title-wrap">
+        <span class="gold-icon"><ion-icon name="sparkles"></ion-icon></span>
+        <h2 class="title">Sommelier Olfativo IA</h2>
+      </div>
+      <button class="close-btn" (click)="onClose()" title="Cerrar">
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+    </div>
+
+    <!-- Progreso -->
+    <div class="progress-bar-wrap" *ngIf="!isCompleted && !isCalculating">
+      <div class="progress-track">
+        <div class="progress-fill" [style.width.%]="((currentStepIndex + 1) / questions.length) * 100"></div>
+      </div>
+      <span class="step-indicator">Paso {{ currentStepIndex + 1 }} de {{ questions.length }}</span>
+    </div>
+
+    <!-- Pantalla de Preguntas -->
+    <div class="quiz-body" *ngIf="!isCompleted && !isCalculating">
+      <div class="question-header">
+        <h3 class="q-title">{{ currentQuestion.title }}</h3>
+        <p class="q-subtitle">{{ currentQuestion.subtitle }}</p>
+      </div>
+
+      <div class="options-grid">
+        <button 
+          *ngFor="let opt of currentQuestion.options" 
+          class="option-card"
+          [class.selected]="selectedAnswers[currentQuestion.id] === opt"
+          (click)="selectOption(opt)">
+          <div class="opt-icon-wrap">
+            <ion-icon [name]="opt.icon"></ion-icon>
+          </div>
+          <div class="opt-text">
+            <span class="opt-label">{{ opt.label }}</span>
+            <span class="opt-desc">{{ opt.description }}</span>
+          </div>
+        </button>
+      </div>
+
+      <div class="wizard-footer">
+        <button 
+          class="nav-btn prev-btn" 
+          *ngIf="currentStepIndex > 0" 
+          (click)="previousStep()">
+          <ion-icon name="arrow-back-outline"></ion-icon> Anterior
+        </button>
+      </div>
+    </div>
+
+    <!-- Pantalla de Cálculo / Maceración IA -->
+    <div class="calculating-state" *ngIf="isCalculating">
+      <div class="luxury-spinner">
+        <div class="spinner-ring"></div>
+        <ion-icon name="flask" class="spinner-icon"></ion-icon>
+      </div>
+      <h3 class="calc-title">Macerando tu firma olfativa...</h3>
+      <p class="calc-desc">Armonizando acordes botánicos, pirámide de fijación y química de piel.</p>
+    </div>
+
+    <!-- Pantalla de Revelación: Gold Shimmer Card -->
+    <div class="recommendation-reveal" *ngIf="isCompleted && recommendation">
+      <div class="gold-shimmer-card">
+        <div class="shimmer-badge">
+          <ion-icon name="ribbon-outline"></ion-icon>
+          <span>{{ recommendation.matchPercentage }}% Match con tu Aura</span>
+        </div>
+
+        <div class="recom-layout">
+          <div class="recom-image-col">
+            <img [src]="recommendation.imageUrl" [alt]="recommendation.fragranceName" class="recom-img" />
+          </div>
+          <div class="recom-info-col">
+            <span class="recom-brand">{{ recommendation.brand }}</span>
+            <h3 class="recom-name">{{ recommendation.fragranceName }}</h3>
+            <span class="recom-family">{{ recommendation.family }}</span>
+            <p class="recom-desc">{{ recommendation.description }}</p>
+
+            <div class="notes-mini-grid">
+              <div class="mini-note">
+                <strong>Salida:</strong> {{ recommendation.notes.top.join(', ') }}
+              </div>
+              <div class="mini-note">
+                <strong>Corazón:</strong> {{ recommendation.notes.heart.join(', ') }}
+              </div>
+              <div class="mini-note">
+                <strong>Fondo:</strong> {{ recommendation.notes.base.join(', ') }}
+              </div>
+            </div>
+
+            <div class="action-buttons-wrap">
+              <button class="gold-cta-btn" (click)="addRecommendationToCart()" [disabled]="addedToCart">
+                <ion-icon name="bag-check-outline"></ion-icon>
+                {{ addedToCart ? '¡Añadido a la Bolsa!' : 'Adquirir Frasco (' + (recommendation.price | currency:'USD') + ')' }}
+              </button>
+              <button class="sample-btn" (click)="addSampleToCart()" [disabled]="addedToCart">
+                <ion-icon name="flask-outline"></ion-icon>
+                Pedir Muestra de 2ml ({{ recommendation.samplePrice | currency:'USD' }})
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="restart-wrap">
+          <button class="restart-btn" (click)="restartQuiz()">
+            <ion-icon name="refresh-outline"></ion-icon> Repetir Quiz Sensorial
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

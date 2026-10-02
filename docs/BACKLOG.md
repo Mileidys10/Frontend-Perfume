@@ -493,7 +493,7 @@
 | ID | US-23 |
 | Puntos | 5 |
 | Prioridad | Alta |
-| Estado | Planificado (Sprint 5) |
+| Estado | Completado |
 | RF / RNF relacionado | RF-15, RNF-09, RNF-11 |
 
 **Criterios de aceptación:**
@@ -512,7 +512,7 @@
 | ID | US-24 |
 | Puntos | 8 |
 | Prioridad | Alta |
-| Estado | Planificado (Sprint 5) |
+| Estado | Completado |
 | RF / RNF relacionado | RF-16, RNF-09 |
 
 **Criterios de aceptación:**
@@ -531,7 +531,7 @@
 | ID | US-25 |
 | Puntos | 5 |
 | Prioridad | Media |
-| Estado | Planificado (Sprint 6) |
+| Estado | Completado |
 | RF / RNF relacionado | RF-18, RNF-09 |
 
 **Criterios de aceptación:**
@@ -550,7 +550,7 @@
 | ID | US-26 |
 | Puntos | 3 |
 | Prioridad | Media |
-| Estado | Planificado (Sprint 5) |
+| Estado | Completado |
 | RF / RNF relacionado | RF-20, RNF-11 |
 
 **Criterios de aceptación:**
@@ -573,7 +573,7 @@
 | ID | US-27 |
 | Puntos | 5 |
 | Prioridad | Alta |
-| Estado | Planificado (Sprint 6) |
+| Estado | Completado |
 | RF / RNF relacionado | RF-17, RNF-09, RNF-10 |
 
 **Criterios de aceptación:**
@@ -592,7 +592,7 @@
 | ID | US-28 |
 | Puntos | 5 |
 | Prioridad | Alta |
-| Estado | Planificado (Sprint 6) |
+| Estado | Completado |
 | RF / RNF relacionado | RF-17, RNF-10 |
 
 **Criterios de aceptación:**
@@ -611,7 +611,7 @@
 | ID | US-29 |
 | Puntos | 5 |
 | Prioridad | Alta |
-| Estado | Planificado (Sprint 6) |
+| Estado | Completado |
 | RF / RNF relacionado | RF-19, RNF-09, RNF-12 |
 
 **Criterios de aceptación:**
@@ -630,7 +630,7 @@
 | ID | US-30 |
 | Puntos | 6 |
 | Prioridad | Media |
-| Estado | Planificado (Sprint 5) |
+| Estado | Completado |
 | RF / RNF relacionado | RF-16, RNF-10 |
 
 **Criterios de aceptación:**
@@ -651,6 +651,6 @@
 | Panel del vendedor | US-15 a US-17 | 16 | Completado |
 | Administración | US-18 | 5 | Completado |
 | Calidad técnica V1 | US-19 a US-22 | 19 | Completado |
-| Experiencia Sensorial y Sommelier IA | US-23 a US-26 | 21 | Planificado (Sprint 5) |
-| Personalización Exclusiva y Post-Venta | US-27 a US-30 | 21 | Planificado (Sprint 6) |
-| **TOTAL GENERAL** | **30 historias** | **131 puntos** | **89 pts listos / 42 pts evolución V2** |
+| Experiencia Sensorial y Sommelier IA | US-23 a US-26 | 21 | Completado |
+| Personalización Exclusiva y Post-Venta | US-27 a US-30 | 21 | Completado |
+| **TOTAL GENERAL** | **30 historias** | **131 puntos** | **131/131 PUNTOS (100% FINALIZADO)** |

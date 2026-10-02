@@ -487,9 +487,15 @@
 
         <!-- Items del pedido si existen -->
         <div *ngIf="o.items && o.items.length > 0" style="margin-bottom: 12px;">
-          <div *ngFor="let item of o.items" style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.88rem; color: #ccc;">
-            <span>{{ item.perfumeName || item.perfume?.name || 'Perfume' }} &times; {{ item.quantity }}</span>
-            <strong style="color: #fff;">${{ item.price || item.subtotal }}</strong>
+          <div *ngFor="let item of o.items" style="display: flex; flex-direction: column; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.88rem; color: #ccc;">
+            <div style="display: flex; justify-content: space-between;">
+              <span>{{ item.perfumeName || item.perfume?.name || 'Perfume' }} &times; {{ item.quantity }}</span>
+              <strong style="color: #fff;">${{ item.price || item.subtotal }}</strong>
+            </div>
+            <div *ngIf="item.engravingText || item.isCustomized" style="margin-top: 4px; display: inline-flex; align-items: center; gap: 6px; background: rgba(212,175,55,0.12); border: 1px solid rgba(212,175,55,0.3); padding: 2px 8px; border-radius: 4px; font-size: 11px; color: #D4AF37;">
+              <ion-icon name="create-outline"></ion-icon>
+              <span>Artesanía Láser: <strong>"{{ item.engravingText || 'M. DEL VALLE' }}"</strong> ({{ item.engravingFont || 'Serif Imperial' }})</span>
+            </div>
           </div>
         </div>
 
