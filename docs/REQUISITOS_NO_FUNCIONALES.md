@@ -147,3 +147,63 @@
 - El build de producción (`ng build --configuration=production`) debe completarse sin errores antes de cada push a `main`.
 - Deben existir al menos dos entornos de variables: `environment.ts` (desarrollo local) y `environment.prod.ts` (producción).
 - Los archivos `.env`, tokens de terceros y claves de API deben estar incluidos en `.gitignore`.
+
+
+---
+
+## RNF-09 - Fluidez Visual a 60 FPS y Optimización de Renderizado Vectorial
+
+| Atributo | Valor |
+|---|---|
+| ID | RNF-09 |
+| Categoría | Rendimiento y Animaciones UX |
+| Prioridad | Alta |
+
+**Criterios de aceptación:**
+- Las animaciones interactivas de la Pirámide Olfativa SVG, simulación de grabado láser y partículas flotantes deben renderizarse a un mínimo sostenido de 60 cuadros por segundo (FPS).
+- Se debe utilizar aceleración gráfica por hardware mediante propiedades CSS optimizadas (`will-change: transform`, `transform: translate3d`) evitando recálculos de layout (*reflows*).
+- El bundle adicional para gráficos interactivos no debe superar 45 KB gzipped.
+
+---
+
+## RNF-10 - Persistencia e Integridad de Metadatos de Personalización
+
+| Atributo | Valor |
+|---|---|
+| ID | RNF-10 |
+| Categoría | Integridad de Datos y Contratos de API |
+| Prioridad | Alta |
+
+**Criterios de aceptación:**
+- Los campos de personalización (`engravingText`, `engravingFont`, `customGiftNote`) deben someterse a sanitización estricta contra inyección XSS tanto en el frontend como en el backend.
+- En la base de datos PostgreSQL, los detalles de personalización se conservan en la columna JSONB `order_items.customization_data` garantizando compatibilidad con órdenes estándar sin personalización.
+- La persistencia en `localStorage` del carrito debe serializar correctamente estos atributos sin pérdida de datos ante recargas de página.
+
+---
+
+## RNF-11 - Accesibilidad y Alto Contraste en Temas de Ultralujo (WCAG 2.1 AA)
+
+| Atributo | Valor |
+|---|---|
+| ID | RNF-11 |
+| Categoría | Accesibilidad e Inclusión |
+| Prioridad | Alta |
+
+**Criterios de aceptación:**
+- Tanto el tema *Midnight Obsidian* como *Ivory Alabaster* deben garantizar un ratio de contraste mínimo de 4.5:1 para textos estándar y 3.0:1 para elementos de control gráfico según WCAG 2.1 nivel AA.
+- Los componentes interactivos (Pirámide Olfativa y Radar de Layering) deben contar con atributos `aria-label`, soporte completo de navegación por teclado y alternativa tabular legible para lectores de pantalla.
+- Se debe respetar la preferencia del sistema operativo del usuario `prefers-reduced-motion`, desactivando partículas flotantes y reduciendo transiciones complejas.
+
+---
+
+## RNF-12 - Micro-interacciones Sensoriales y Feedback Háptico en PWA
+
+| Atributo | Valor |
+|---|---|
+| ID | RNF-12 |
+| Categoría | Experiencia Sensorial y Móvil |
+| Prioridad | Media |
+
+**Criterios de aceptación:**
+- En entornos móviles gobernados por Capacitor o navegadores compatibles con la Web Vibration API (`navigator.vibrate`), acciones clave (atomización virtual, grabado completado, agregado a bolsa) emitirán micro-pulsos hápticos sutiles (15 a 30 ms).
+- Las curvas de animación CSS deben implementar funciones bezier cúbicas personalizadas (`cubic-bezier(0.25, 1, 0.5, 1)`) que emulen la inercia del cristal pesado de alta perfumería.

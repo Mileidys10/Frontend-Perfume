@@ -241,7 +241,85 @@ src/app/guards/role.guard.ts
 
 ---
 
-## Resumen del plan de sprints
+
+
+---
+
+# Sprint 5 - Experiencia Sensorial y Sommelier IA
+
+| Atributo | Detalle |
+|---|---|
+| Nombre del sprint | Experiencia Sensorial y Sommelier IA |
+| Duración | 2 semanas |
+| Puntos de historia comprometidos | 22 |
+| Estado | Planificado / Listo para Ejecución |
+| Objetivo principal | Elevar la boutique a la categoría de Haute Parfumerie digital integrando la pirámide olfativa interactiva SVG, el recomendador inteligente Sommelier IA, el configurador de Cofre Discovery Box y el selector estético dual Midnight/Ivory. |
+
+### Historias incluidas en el sprint
+
+- **US-23 - Explorador Interactivo de Pirámide Olfativa** (5 pts)
+- **US-24 - Quiz Sommelier Olfativo IA de Recomendación** (8 pts)
+- **US-26 - Selector de Tema Dual Midnight Obsidian vs Ivory Alabaster** (3 pts)
+- **US-30 - Configurador de Cofre Discovery Box (Set de 5 Muestras)** (6 pts)
+
+### Tareas técnicas de ingeniería (Sprint 5)
+
+- [ ] **TASK-SP5-01**: Diseñar componente SVG vectorial interactivo `OlfactoryPyramidComponent` con división de tres niveles (Salida, Corazón, Fondo). *(8h)*
+- [ ] **TASK-SP5-02**: Implementar halo dorado reactivo (*Golden Aura Glow*) y animación CSS de partículas olfativas con aceleración por hardware. *(6h)*
+- [ ] **TASK-SP5-03**: Desarrollar el motor algorítmico y wizard de 4 pasos `SommelierQuizModalComponent` con cálculo de afinidad porcentual. *(10h)*
+- [ ] **TASK-SP5-04**: Diseñar la tarjeta de revelación sensorial de lujo estilo *Gold Shimmer Card* con CTAs de compra y muestra. *(6h)*
+- [ ] **TASK-SP5-05**: Implementar arquitectura de variables CSS para el tema dual *Midnight Obsidian* (`#0A0A0A`) e *Ivory Alabaster* (`#FDFBF7`) con persistencia en `localStorage`. *(5h)*
+- [ ] **TASK-SP5-06**: Crear el componente `DiscoveryBoxBuilderComponent` con carrusel de viales de 2ml y lógica de validación de 5 selecciones exactas. *(8h)*
+- [ ] **TASK-SP5-07**: Integrar cupón de descuento automático de $30 USD vinculado a la adquisición del Discovery Box. *(4h)*
+- [ ] **TASK-SP5-08**: Pruebas de accesibilidad WCAG 2.1 AA (contraste de color y navegación por teclado en modal y pirámide). *(5h)*
+
+### Criterios de aceptación del sprint (DoD)
+
+- La pirámide olfativa SVG se renderiza a 60 FPS sin saltos de fotograma en desktop y móvil.
+- El Sommelier Quiz calcula resultados en menos de 200 ms y genera tarjetas compartibles.
+- El conmutador de temas alterna instantáneamente sin parpadeos (*FOUC*) y persiste en recargas.
+- El Discovery Box permite agregar el cofre al carrito como un producto especial con sus 5 ítems asociados.
+
+---
+
+# Sprint 6 - Personalización Studio y Rastreo Luxury
+
+| Atributo | Detalle |
+|---|---|
+| Nombre del sprint | Personalización Studio y Rastreo Luxury |
+| Duración | 2 semanas |
+| Puntos de historia comprometidos | 20 |
+| Estado | Planificado |
+| Objetivo principal | Conceder a los compradores la posibilidad de personalizar físicamente su frasco con grabado láser de alta precisión, experimentar con la mezcla de acordes (Fragrance Layering), propagar los metadatos al backend y vivir una experiencia de entrega de guante blanco. |
+
+### Historias incluidas en el sprint
+
+- **US-25 - Laboratorio de Fragrance Layering (Combinación de Acordes)** (5 pts)
+- **US-27 - Atelier de Grabado Láser Personalizado en Frasco** (5 pts)
+- **US-28 - Propagación de Personalización a Carrito, Checkout y Pedidos** (5 pts)
+- **US-29 - Timeline Boutique de Seguimiento con Sello de Autenticidad** (5 pts)
+
+### Tareas técnicas de ingeniería (Sprint 6)
+
+- [ ] **TASK-SP6-01**: Construir el componente interactivo `LaserEngravingStudioComponent` con renderizado sobre frasco en Canvas/SVG. *(8h)*
+- [ ] **TASK-SP6-02**: Integrar fuentes tipográficas de alta perfumería (*Serif Imperial*, *Script Royal*, *Sans Minimalist*) con efecto dorado reflectante. *(5h)*
+- [ ] **TASK-SP6-03**: Extender el modelo `CartItem` y DTOs de backend (`CreateOrderItemRequest`) para soportar `engravingText` y `engravingFont`. *(6h)*
+- [ ] **TASK-SP6-04**: Actualizar la vista del vendedor (`SellerOrdersPage`) con la ficha artesanal de preparación de grabado. *(5h)*
+- [ ] **TASK-SP6-05**: Desarrollar el laboratorio interactivo `FragranceLayeringStudioComponent` con gráfico de radar de acordes olfativos. *(8h)*
+- [ ] **TASK-SP6-06**: Diseñar algoritmo de sugerencia de atomización y descuento automático del 15% para el dúo armónico. *(5h)*
+- [ ] **TASK-SP6-07**: Crear la línea de tiempo boutique `LuxuryOrderTimelineComponent` con los 5 hitos animados y sello de lacre. *(7h)*
+- [ ] **TASK-SP6-08**: Incorporar generador de Certificado de Autenticidad en PDF con *Batch Code* criptográfico verificado. *(6h)*
+
+### Criterios de aceptación del sprint (DoD)
+
+- El grabado láser valida hasta 15 caracteres y sanitiza cualquier carácter malicioso.
+- Los metadatos de personalización persisten íntegramente en base de datos PostgreSQL (`order_items.customization_data`).
+- El timeline de seguimiento refleja cambios en tiempo real del backend (`PENDING`, `PROCESSING`, `SHIPPED`, `DELIVERED`).
+- Cobertura de pruebas unitarias superior al 80% en los nuevos servicios de personalización y layering.
+
+---
+
+## Resumen del plan de sprints ampliado (V1 + V2)
 
 | Sprint | Objetivo principal | Puntos | Estado |
 |---|---|---|---|
@@ -249,22 +327,6 @@ src/app/guards/role.guard.ts
 | Sprint 2 | Panel vendedor completo, moderación admin, tests | 21 | **COMPLETADO** |
 | Sprint 3 | Calidad, accesibilidad y optimización de rendimiento | 20 | **COMPLETADO** |
 | Sprint 4 | Despliegue, dockerización multi-stage y documentación | 20 | **COMPLETADO** |
-| **Total** | — | **83 puntos** | **100% FINALIZADO** |
-
----
-
-## Tabla de tecnologias del stack completo
-
-| Capa | Tecnología | Rol |
-|---|---|---|
-| Frontend UI | Angular 20 + Ionic 8 | Interfaz de usuario web y móvil |
-| Lenguaje frontend | TypeScript 5.8 | Tipado estático |
-| Runtime nativo | Capacitor 7 | Compilación a Android e iOS |
-| API REST | Spring Boot 3.5 | Servidor de aplicaciones |
-| Lenguaje backend | Java 21 | Lógica de negocio |
-| Seguridad | Spring Security + JWT (jjwt 0.12.6) | Autenticación y autorización |
-| Base de datos | PostgreSQL | Persistencia principal |
-| Almacenamiento de imágenes | Supabase Storage | CDN de imágenes de productos |
-| Documentación API | SpringDoc OpenAPI (Swagger) | Contrato de la API |
-| Despliegue frontend | Vercel | Hosting web |
-| Despliegue backend | Render | Hosting del servidor |
+| Sprint 5 | Experiencia Sensorial, Sommelier IA, Discovery Box y Tema Dual | 22 | **PLANIFICADO (V2)** |
+| Sprint 6 | Personalización Grabado Láser, Layering Studio y Rastreo Luxury | 20 | **PLANIFICADO (V2)** |
+| **Total General** | **Evolución completa Haute Parfumerie** | **125 puntos** | **83 listos / 42 por ejecutar** |

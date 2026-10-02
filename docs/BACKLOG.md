@@ -476,15 +476,181 @@
 
 ---
 
-## Resumen del backlog
 
-| Eje | Historias | Puntos totales | Completadas |
+
+---
+
+## EJE 8: EXPERIENCIA SENSORIAL Y ALTA PERFUMERÍA
+
+---
+
+### US-23 - Explorador Interactivo de Pirámide Olfativa
+
+**Como** cliente sibarita, **quiero** explorar interactivamente la pirámide de notas de salida, corazón y fondo en la ficha del perfume, **para** entender la evolución aromática antes de comprar.
+
+| Campo | Valor |
+|---|---|
+| ID | US-23 |
+| Puntos | 5 |
+| Prioridad | Alta |
+| Estado | Planificado (Sprint 5) |
+| RF / RNF relacionado | RF-15, RNF-09, RNF-11 |
+
+**Criterios de aceptación:**
+- En `/product-detail/:id`, se renderiza una pirámide facetada dividida en Salida, Corazón y Fondo.
+- Al interactuar con cada nivel, se resalta con brillo dorado y se muestran los acordes botánicos con tiempo estimado de fijación.
+- Soporte táctil optimizado para dispositivos móviles con gestos táctiles.
+
+---
+
+### US-24 - Quiz Sommelier Olfativo IA de Recomendación
+
+**Como** comprador indeciso, **quiero** completar un breve quiz sensorial de 4 preguntas guiado por un sommelier inteligente, **para** descubrir mi fragancia firma personalizada con su porcentaje de afinidad.
+
+| Campo | Valor |
+|---|---|
+| ID | US-24 |
+| Puntos | 8 |
+| Prioridad | Alta |
+| Estado | Planificado (Sprint 5) |
+| RF / RNF relacionado | RF-16, RNF-09 |
+
+**Criterios de aceptación:**
+- Flujo interactivo en 4 pasos (Ocasión, Estela, Familia aromática, Temporada/Aura).
+- Pantalla de revelación tipo "Gold Card" con porcentaje de afinidad ("98% Match con tu esencia"), descripción sensorial personalizada y botón de compra directa.
+- Opción de reiniciar el quiz o compartir la recomendación.
+
+---
+
+### US-25 - Laboratorio de Fragrance Layering (Combinación de Acordes)
+
+**Como** amante de la perfumería de autor, **quiero** combinar dos fragancias en un lienzo interactivo y ver su radar de compatibilidad aromática, **para** crear una estela olfativa irrepetible.
+
+| Campo | Valor |
+|---|---|
+| ID | US-25 |
+| Puntos | 5 |
+| Prioridad | Media |
+| Estado | Planificado (Sprint 6) |
+| RF / RNF relacionado | RF-18, RNF-09 |
+
+**Criterios de aceptación:**
+- Selector visual de 2 productos del catálogo con gráfico de radar de acordes aromáticos.
+- Algoritmo de sinergia olfativa que calcula balance y emite recomendaciones de atomización.
+- Botón "Adquirir Dúo con Descuento de Layering" que agrega ambos frascos al carrito con un 15% bonificado.
+
+---
+
+### US-26 - Selector de Tema Dual Midnight Obsidian vs Ivory Alabaster
+
+**Como** usuario exigente, **quiero** alternar entre una atmósfera oscura misteriosa (Midnight Obsidian) y una luminosa opulenta (Ivory Alabaster), **para** adaptar la tienda a mi preferencia estética.
+
+| Campo | Valor |
+|---|---|
+| ID | US-26 |
+| Puntos | 3 |
+| Prioridad | Media |
+| Estado | Planificado (Sprint 5) |
+| RF / RNF relacionado | RF-20, RNF-11 |
+
+**Criterios de aceptación:**
+- Conmutador elegante en el navbar con iconos dorados de sol y luna de alta estética.
+- Transición fluida de paleta mediante variables CSS globales (`--luxury-bg`, `--luxury-gold`).
+- Persistencia automática de la preferencia en `localStorage`.
+
+---
+
+## EJE 9: PERSONALIZACIÓN EXCLUSIVA Y POST-VENTA DE GUANTE BLANCO
+
+---
+
+### US-27 - Atelier de Grabado Láser Personalizado en Frasco
+
+**Como** cliente que busca un obsequio inolvidable, **quiero** previsualizar en tiempo real el grabado de un nombre o fecha sobre el cristal del frasco, **para** encargar una pieza irrepetible.
+
+| Campo | Valor |
+|---|---|
+| ID | US-27 |
+| Puntos | 5 |
+| Prioridad | Alta |
+| Estado | Planificado (Sprint 6) |
+| RF / RNF relacionado | RF-17, RNF-09, RNF-10 |
+
+**Criterios de aceptación:**
+- Campo de texto con límite de 15 caracteres y selector de 3 fuentes exclusivas (Serif Imperial, Script Royal, Sans Minimalist).
+- Previsualización en tiempo real sobre la silueta del frasco con textura metálica dorada reflectante.
+- Inclusión del servicio de personalización en el subtotal del ítem.
+
+---
+
+### US-28 - Propagación de Personalización a Carrito, Checkout y Pedidos
+
+**Como** vendedor y maestro artesano, **quiero** recibir el texto y tipografía de grabado en el detalle de la orden de compra, **para** que el taller aplique el grabado con exactitud.
+
+| Campo | Valor |
+|---|---|
+| ID | US-28 |
+| Puntos | 5 |
+| Prioridad | Alta |
+| Estado | Planificado (Sprint 6) |
+| RF / RNF relacionado | RF-17, RNF-10 |
+
+**Criterios de aceptación:**
+- `CartItem` almacena `engravingText` y `engravingFont`.
+- El endpoint `POST /api/orders` recibe el payload con metadatos de personalización.
+- La vista de pedidos del vendedor (`/seller/orders`) despliega la insignia "Frasco Personalizado" con los datos exactos de grabado.
+
+---
+
+### US-29 - Timeline Boutique de Seguimiento con Sello de Autenticidad
+
+**Como** cliente de alta gama, **quiero** monitorear el proceso artesanal y de despacho de mi pedido en una línea de tiempo boutique, **para** disfrutar de una experiencia de compra transparente y exclusiva.
+
+| Campo | Valor |
+|---|---|
+| ID | US-29 |
+| Puntos | 5 |
+| Prioridad | Alta |
+| Estado | Planificado (Sprint 6) |
+| RF / RNF relacionado | RF-19, RNF-09, RNF-12 |
+
+**Criterios de aceptación:**
+- Vista de orden con 5 hitos con animaciones de lujo e insignias doradas.
+- Indicador de *Batch Code* del perfumista verificado con sello de cera lacrada animado.
+- Botón para descargar o imprimir el Certificado de Autenticidad en PDF.
+
+---
+
+### US-30 - Configurador de Cofre Discovery Box (Set de 5 Muestras)
+
+**Como** nuevo explorador de la perfumería de lujo, **quiero** armar un cofre personalizado con 5 muestras de 2ml a mi elección, **para** probar los acordes en mi piel antes de adquirir el frasco de 100ml.
+
+| Campo | Valor |
+|---|---|
+| ID | US-30 |
+| Puntos | 6 |
+| Prioridad | Media |
+| Estado | Planificado (Sprint 5) |
+| RF / RNF relacionado | RF-16, RNF-10 |
+
+**Criterios de aceptación:**
+- Selector interactivo tipo carrusel para elegir exactamente 5 muestras de 2ml del catálogo.
+- Estuche virtual 3D que muestra los viales seleccionados con sus etiquetas.
+- Generación de un cupón de reintegro de $30 USD válido por 30 días para la compra del frasco de 100ml.
+
+---
+
+## Resumen del backlog actualizado (V1 + V2 Haute Parfumerie)
+
+| Eje | Historias | Puntos totales | Estado |
 |---|---|---|---|
-| Autenticación y sesión | US-01 a US-05 | 14 | 4/5 |
-| Catálogo y búsqueda | US-06 a US-09 | 13 | 3/4 |
-| Carrito y checkout | US-10 a US-11 | 13 | 1/2 |
-| Favoritos y perfil | US-12 a US-14 | 9 | 2/3 |
-| Panel del vendedor | US-15 a US-17 | 16 | 2/3 |
-| Administración | US-18 | 5 | 0/1 |
-| Calidad técnica | US-19 a US-22 | 19 | 0/4 |
-| **TOTAL** | **22 historias** | **89 puntos** | **12/22** |
+| Autenticación y sesión | US-01 a US-05 | 14 | Completado |
+| Catálogo y búsqueda | US-06 a US-09 | 13 | Completado |
+| Carrito y checkout | US-10 a US-11 | 13 | Completado |
+| Favoritos y perfil | US-12 a US-14 | 9 | Completado |
+| Panel del vendedor | US-15 a US-17 | 16 | Completado |
+| Administración | US-18 | 5 | Completado |
+| Calidad técnica V1 | US-19 a US-22 | 19 | Completado |
+| Experiencia Sensorial y Sommelier IA | US-23 a US-26 | 21 | Planificado (Sprint 5) |
+| Personalización Exclusiva y Post-Venta | US-27 a US-30 | 21 | Planificado (Sprint 6) |
+| **TOTAL GENERAL** | **30 historias** | **131 puntos** | **89 pts listos / 42 pts evolución V2** |
