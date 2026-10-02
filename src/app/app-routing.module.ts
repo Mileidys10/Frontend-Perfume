@@ -6,8 +6,13 @@ import { RoleGuard } from './guards/role.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'home',
     pathMatch: 'full'
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+    // Acceso público para catálogo y Sommelier IA (RF-14)
   },
   {
     path: 'login',
@@ -16,11 +21,6 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule)
-  },
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
-    canActivate: [AuthGuard]
   },
   {
     path: 'cart',
@@ -37,16 +37,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/profile-client/profile-client.module').then(m => m.ProfileClientPageModule),
     canActivate: [AuthGuard]
   },
-  // RUTAS PARA PRODUCT-DETAIL - AMBAS VERSIONES
+  // RUTAS PARA PRODUCT-DETAIL - PÚBLICAS (RF-14)
   {
     path: 'product-detail/:id',
-    loadChildren: () => import('./pages/product-detail/product-detail.module').then(m => m.ProductDetailPageModule),
-    canActivate: [AuthGuard]
+    loadChildren: () => import('./pages/product-detail/product-detail.module').then(m => m.ProductDetailPageModule)
   },
   {
     path: 'product-detail',
-    loadChildren: () => import('./pages/product-detail/product-detail.module').then(m => m.ProductDetailPageModule),
-    canActivate: [AuthGuard]
+    loadChildren: () => import('./pages/product-detail/product-detail.module').then(m => m.ProductDetailPageModule)
   },
   {
     path: 'seller',
@@ -74,7 +72,7 @@ const routes: Routes = [
     path: 'forgot-password',
     loadChildren: () => import('./pages/forgot-password/forgot-password.module').then(m => m.ForgotPasswordPageModule)
   },
-  // Ruta comodín para 404 - debe ser la última
+  // Ruta comodín para 404
   {
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundPageModule)
