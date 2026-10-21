@@ -68,3 +68,29 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# ==============================================================================
+# ESCUDO DE SEGURIDAD Y GOBERNANZA AGENTICA (CERO FUGA DE SECRETOS)
+# ==============================================================================
+.env
+*.env
+.env.*
+*.local
+credentials.json
+service_account.json
+*.pem
+*.key
+*.pfx
+
+# Archivos de entorno Angular con credenciales locales
+src/environments/environment.ts
+src/environments/environment.prod.ts
+!src/environments/environment.example.ts
+
+# Gobernanza y contexto interno de fabrica
+AGENTS.md
+GEMINI.md
+.agents/
+.gemini/
+contexto/
+obsidian-vault/
