@@ -1,4 +1,4 @@
-﻿# Luxury Perfumes Store - Frontend & Fullstack E-Commerce
+# 💎 Aeterna Perfumes — Frontend Web & Móvil (Angular 20 + Ionic 8)
 
 <p align="center">
   <img src="https://img.shields.io/badge/Angular-20.0-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular 20" />
@@ -6,116 +6,97 @@
   <img src="https://img.shields.io/badge/TypeScript-5.8-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
   <img src="https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
   <img src="https://img.shields.io/badge/Nginx-Alpine-009639?style=for-the-badge&logo=nginx&logoColor=white" alt="Nginx" />
-  <img src="https://img.shields.io/badge/Vercel-Deployed-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" />
+  <img src="https://img.shields.io/badge/Estética-Quiet_Luxury-D4AF37?style=for-the-badge" alt="Quiet Luxury" />
+  <img src="https://img.shields.io/badge/Licencia-MIT-F59E0B?style=for-the-badge" alt="MIT License" />
 </p>
 
-> Plataforma e-commerce empresarial y aplicación móvil progresiva (PWA) de alto rendimiento para comercialización de fragancias exclusivas y perfumería de diseñador. Conectada al backend empresarial de Spring Boot 3.5 y base de datos relacional PostgreSQL.
+> **Plataforma E-Commerce Empresarial y Aplicación Móvil Progresiva (PWA)** de alto rendimiento para la comercialización de fragancias exclusivas y perfumería de diseñador. Conectada al backend empresarial desacoplado en Spring Boot 3 y PostgreSQL.
+
+* **Desarrolladora**: [Mileidys Agámez Ospino](https://github.com/Mileidys10) — Ingeniera de Software & Especialista Frontend/Móvil.
+* **Backend REST API Asociado**: [Tienda-de-Perfumes](https://github.com/Mileidys10/Tienda-de-Perfumes) (Java 21 + Spring Boot 3 + Spring Security + JWT + PostgreSQL).
 
 ---
 
-## 💎 Características Principales y Funcionalidad
+## ✨ Características Principales & Funcionalidad
 
-1. **Catálogo de Lujo Reactivo**:
-   - Búsqueda en tiempo real, filtrado por notas olfativas, acordes (amaderados, florales, cítricos) y marcas.
-   - **Skeleton Screens**: Marcadores de posición animados con paleta Luxury Gold durante operaciones asíncronas para una experiencia de usuario fluida y sin saltos visuales.
-2. **Arquitectura de Seguridad Multi-Rol (RBAC + JWT)**:
-   - Protección de rutas mediante `AuthGuard` y `RoleGuard`.
+1. **Catálogo de Lujo Reactivo & Pirámide Olfativa SVG**:
+   - Visualización interactiva de notas de salida, corazón y fondo renderizadas en SVG dinámico.
+   - Búsqueda en tiempo real, filtrado por acordes (amaderados, florales, cítricos, orientales) y marcas.
+   - **Skeleton Screens**: Marcadores de posición animados con paleta Luxury Gold durante operaciones asíncronas para eliminar saltos de maquetación (CLS = 0).
+
+2. **Sommelier Virtual IA & Discovery Box**:
+   - Asistente inteligente para recomendación personalizada de fragancias según ocasión, clima y preferencias olfativas.
+   - Constructor de kits de descubrimiento (Discovery Box) con selección interactiva de muestras.
+
+3. **Layering Studio & Grabado Láser Personalizado**:
+   - Simulador interactivo de superposición de fragancias (Layering) para crear acordes únicos.
+   - Previsualizador en tiempo real de tipografía y acabado para grabado láser en el frasco.
+
+4. **Arquitectura de Seguridad Multi-Rol (RBAC + JWT)**:
+   - Protección reactiva de rutas mediante `AuthGuard` y `RoleGuard`.
    - Soporte para tres perfiles de usuario: `CLIENTE`, `VENDEDOR` y `ADMIN`.
-3. **Panel de Gestión de Pedidos del Vendedor (Sprint 2)**:
-   - Pestaña de pedidos con estados en tiempo real (`PENDIENTE`, `EN PREPARACIÓN`, `ENVIADO`, `ENTREGADO`).
-   - Transiciones de estado con un clic y badges tematizados en oro (`#D4AF37`) y esmeralda (`#2DD36F`).
-4. **Módulo de Moderación para Administradores (Sprint 2)**:
-   - Panel de control administrativo para autorizar o rechazar fragancias subidas por vendedores antes de su publicación en el catálogo general.
-5. **Checkout Multi-Paso & Carrito Persistente**:
-   - Sincronización reactiva con `CartService`, cálculo dinámico de subtotales y pasarela de pago simulada.
-6. **Manejo Global de Errores & Página 404 Personalizada**:
-   - Captura interceptada de códigos HTTP 401, 403 y 500 con redirección segura y pantalla 404 con estética oscura y dorada.
-7. **Contenerización Multi-Stage con Docker Compose**:
-   - Empaquetado en Nginx Alpine con compresión Gzip, cabeceras de seguridad y fallback SPA.
+
+5. **Panel de Gestión de Pedidos del Vendedor & Moderación**:
+   - Dashboard en tiempo real con transiciones de estado de órdenes (`PENDIENTE`, `EN PREPARACIÓN`, `ENVIADO`, `ENTREGADO`).
+   - Módulo de moderación administrativa para aprobar o rechazar fragancias antes de su publicación.
+
+6. **Checkout Multi-Paso & Carrito Persistente**:
+   - Sincronización reactiva con `CartService`, cálculo dinámico de subtotales, impuestos y pasarela de pago simulada.
 
 ---
 
-## 🚀 Despliegue Rápido con Docker (Recomendado)
+## 🐳 Despliegue con Docker (Nginx Alpine)
 
-Levanta la solución completa (PostgreSQL 17, Spring Boot 3.5 y Frontend Nginx) con un único comando:
+El frontend está empaquetado como imagen multi-stage optimizada sobre Nginx Alpine:
 
 ```bash
-docker compose -f docker-compose.fullstack.yml up -d --build
+# 1. Clonar el repositorio
+git clone https://github.com/Mileidys10/Frontend-Perfume.git
+cd Frontend-Perfume
+
+# 2. Levantar el contenedor
+docker compose up -d --build
 ```
 
-- **Frontend Web**: [http://localhost](http://localhost) (Puerto 80)
-- **Backend API REST**: [http://localhost:8080/api](http://localhost:8080/api)
-- **Swagger UI**: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+* Acceso en navegador: `http://localhost:4200` (o el puerto configurado en Docker Compose).
 
 ---
 
-## 🛠️ Tecnologías y Herramientas
+## 💻 Ejecución Local en Desarrollo
 
-| Componente | Tecnología | Rol |
-|---|---|---|
-| **Frontend SPA** | Angular 20 + Ionic 8 | Interfaz reactiva web y móvil |
-| **Lenguaje** | TypeScript 5.8 | Tipado estático estricto |
-| **Runtime Móvil** | Capacitor 7 | Compilación nativa iOS / Android |
-| **Servidor Web Producción** | Nginx Alpine | Servidor web con Gzip y caché |
-| **Contenerización** | Docker Multi-Stage | Empaquetado reproducible |
-| **Backend REST** | Spring Boot 3.5 (Java 21) | Lógica de negocio y persistencia |
-| **Base de Datos** | PostgreSQL 17 | Almacenamiento relacional |
-| **Hosting Cloud** | Vercel (Front) + Render (Back) | Despliegue en la nube |
+### Requisitos:
+* **Node.js**: Versión 20 LTS o superior.
+* **NPM**: 10+.
 
----
-
-## 👥 Cuentas y Credenciales Demo
-
-| Rol | Correo Electrónico | Contraseña | Permisos |
-|---|---|---|---|
-| **Administrador** | `admin@perfumes.com` | `Admin123*` | Métricas, auditoría de usuarios y moderación de fragancias |
-| **Vendedor** | `vendedor@perfumes.com` | `Vendedor123*` | Gestión de inventario, catálogo, marcas y órdenes de despacho |
-| **Cliente** | `cliente@perfumes.com` | `Cliente123*` | Exploración, lista de deseos, carrito y compras |
-
----
-
-## 📋 Documentación de Ingeniería
-
-- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) &mdash; Diagramas C4, flujo de autenticación JWT y ciclo de vida de órdenes.
-- [docs/SETUP.md](docs/SETUP.md) &mdash; Guía paso a paso de instalación, configuración local y variables de entorno.
-- [docs/SPRINTS.md](docs/SPRINTS.md) &mdash; Registro detallado del Product Backlog y cumplimiento de los 4 Sprints (83/83 pts).
-- [docs/REQUISITOS_FUNCIONALES.md](docs/REQUISITOS_FUNCIONALES.md) &mdash; Especificación formal de Requerimientos Funcionales (RF).
-- [docs/REQUISITOS_NO_FUNCIONALES.md](docs/REQUISITOS_NO_FUNCIONALES.md) &mdash; Criterios de calidad, seguridad y rendimiento (RNF).
-
----
-
-## 🧪 Pruebas Automatizadas y Calidad de Código
-
+### Pasos:
 ```bash
-# Compilar producción (0 errores, 0 advertencias)
-npm run build
+# Instalar dependencias
+npm install
 
-# Ejecutar suite de pruebas unitarias
-npm test -- --watch=false --browsers=ChromeHeadless
+# Iniciar servidor de desarrollo
+npm start
+# O con Angular CLI:
+ng serve --open
 ```
 
-Suites de pruebas cubiertas:
-- `AuthGuard` & `RoleGuard` (Control de acceso por rol y redirección)
-- `AuthService` (Autenticación JWT y persistencia)
-- `CartService` (Operaciones de carrito reactivo y totales)
-- `ProductService` (Consumo de catálogo, marcas y categorías)
+---
+
+## 📁 Estructura del Código (`src/app/`)
+
+```text
+src/app/
+├── components/         # Componentes visuales y pantallas (Home, Detail, Checkout, Seller, Admin)
+├── guards/             # AuthGuard, RoleGuard para control de acceso RBAC
+├── interceptors/       # AuthInterceptor (JWT injection) y ErrorInterceptor
+├── models/             # Interfaces de dominio TypeScript (Perfume, Order, User, Cart)
+├── services/           # Lógica de negocio cliente (Auth, Perfume, Cart, Order, Notification)
+└── shared/             # Componentes reutilizables, skeletons y layouts
+```
 
 ---
 
-## 🎨 Sistema de Diseño (Luxury Gold Palette)
+## 📄 Licencia y Autoría
 
-| Nombre del Token | Código Hexadecimal | Propósito Visual |
-|---|---|---|
-| **Gold Primary** | `#D4AF37` | Títulos, botones de acción principal, bordes activos |
-| **Gold Dark** | `#B8860B` | Gradientes secundarios y acentos profundos |
-| **Dark Onyx** | `#0A0A0A` | Fondo principal de la aplicación |
-| **Surface Card** | `#181818` | Tarjetas de perfumes, modales y navegación |
-| **Pure White** | `#FFFFFF` | Textos de alto contraste |
-| **Emerald Green** | `#2DD36F` | Estado de pedido entregado y operaciones exitosas |
-
----
-
-## 🔗 Repositorios Relacionados
-
-- **Backend Empresarial:** [Mileidys10/Tienda-de-Perfumes](https://github.com/Mileidys10/Tienda-de-Perfumes)
-- **Frontend SPA:** [Mileidys10/Frontend-Perfume](https://github.com/Mileidys10/Frontend-Perfume)
+* **Autora**: Mileidys Agámez Ospino
+* **GitHub**: [@Mileidys10](https://github.com/Mileidys10)
+* **Licencia**: MIT
